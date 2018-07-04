@@ -1,0 +1,15 @@
+<thf-page-list
+t-show-more-disabled="true"
+  t-title="Clientes"
+  [t-actions]="actions"
+  [t-breadcrumb]="breadcrumb"
+  [t-disclaimer-group]="disclaimerGroup"
+  [t-filter]="filterSettings">
+
+  <thf-table
+    [t-actions]="customerDetail"
+    [t-columns]="columns"
+    [t-items]="itemsFiltered">
+  </thf-table>
+
+</thf-page-list>

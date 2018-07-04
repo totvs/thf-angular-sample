@@ -1,0 +1,146 @@
+<thf-page-default 
+  [t-actions]="pageEditActions ? editUserActions : newUserActions"
+  [t-breadcrumb]="pageEditActions ? editUserBreadcrumb : newUserBreadcrumb"
+  [t-title]="pageEditActions ? 'Editar Cliente' : 'Adicionar Cliente'">
+
+  <div class="thf-row">
+    <div class="thf-lg-6 thf-offset-lg-3 thf-xl-6 thf-offset-xl-3">
+      <form #formUser="ngForm">
+        <div class="thf-row">
+          <thf-input
+            class="thf-md-12"
+            name="name"
+            [(ngModel)]="customer.name"
+            t-clean
+            t-label="Nome"
+            t-minlength="3"
+            t-placeholder="Insira o Nome"
+            t-required>
+          </thf-input>
+          <thf-email
+            class="thf-md-6"
+            name="email"
+            [(ngModel)]="customer.email"
+            t-clean
+            t-label="Email"
+            t-placeholder="Insira o Email"
+            t-required>
+          </thf-email>
+          <thf-input
+            class="thf-md-6"
+            name="phone"
+            [(ngModel)]="customer.phone"
+            t-clean
+            t-label="Telefone"
+            t-placeholder="Insira o Telefone"
+            t-mask="(99) 99999?-9999"
+            t-required>
+          </thf-input>
+        </div>
+
+        <div class="thf-row">
+          <thf-datepicker
+            class="thf-md-6"
+            name="birthday"
+            [(ngModel)]="customer.birthday"
+            t-format="dd/mm/yyyy"
+            t-label="Data de nascimento">
+          </thf-datepicker>
+        </div>
+
+        <div class="thf-row">
+          <thf-select
+            class="thf-md-6"
+            name="nationality"
+            [(ngModel)]="customer.nationality"
+            t-label="Nacionalidade"
+            [t-options]="nationalityOptions">
+          </thf-select>
+          <thf-select
+            class="thf-md-6"
+            name="status"
+            [(ngModel)]="customer.status"
+            t-label="Influência"
+            [t-options]="statusOptions">
+          </thf-select>
+        </div>
+
+        <div class="thf-row">
+          <div class="thf-md-12">
+            <thf-checkbox-group
+              name="personality"
+              [(ngModel)]="customer.personality"
+              t-label="Características"
+              [t-options]="personalityOptions">
+            </thf-checkbox-group>
+          </div>
+        </div>
+
+
+      </form>
+    </div>
+  </div>
+</thf-page-default>
+
+<thf-modal #formModal
+  t-title="Save successful"
+  [t-primary-action]="modalPrimaryAction">
+
+  <div class="thf-row">
+    <thf-info
+      class="thf-md-12"
+      t-label="Name"
+      [t-value]="customer.name">
+    </thf-info>
+  </div>
+  <hr>
+  <div class="thf-row">
+    <thf-info
+      class="thf-md-6"
+      t-label="E-mail"
+      [t-value]="customer.email">
+    </thf-info>
+    <thf-info
+      class="thf-md-6"
+      t-label="Telefone"
+      [t-value]="customer.phone">
+    </thf-info>
+    <thf-info
+      class="thf-md-6"
+      t-label="Data de nascimento"
+      [t-value]="customer.birthday">
+    </thf-info>
+  </div>
+  <hr>
+  <div class="thf-row">
+    <thf-info
+      class="thf-md-6"
+      t-label="Nacionalidade"
+      [t-value]="customer.nationality">
+    </thf-info>
+    <thf-info
+      class="thf-md-6"
+      t-label="Influência"
+      [t-value]="customer.status">
+    </thf-info>
+  </div>
+  <hr>
+  <div class="thf-row">
+    <thf-info
+      class="thf-md-6"
+      t-label="Características"
+      [t-value]="customer.personality | json">
+    </thf-info>
+  </div>
+</thf-modal>
+
+<thf-modal #modalDeleteUser
+  t-close
+  t-primary-label="Confirmar"
+  t-size="sm"
+  t-title="Tem certeza que deseja excluir?"
+  [t-primary-action]="confirmDeleteAction"
+  [t-secondary-action]="cancelDeleteAction">
+
+  <div class="thf-font-text-large thf-text-left">O usuário {{ customer.name }} não estará mais vínculado ao projeto.</div>
+</thf-modal>

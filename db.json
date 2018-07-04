@@ -1,0 +1,44 @@
+{
+  "clients": [
+    {
+      "id": 1,
+      "codigo": "01",
+      "name": "Hanz Solo",
+      "email": "han@totvs.com.br",
+      "phone": "+55 430 123 234",
+      "status": "rebel"
+    },
+    {
+      "id": 2,
+      "codigo": "02",
+      "name": "Leia Organa",
+      "email": "leia@totvs.com.br",
+      "phone": "+55 353 535 677",
+      "status": "rebel"
+    },
+    {
+      "id": 3,
+      "codigo": "03",
+      "name": "Rey Kenobi",
+      "email": "rey@totvs.com.br",
+      "phone": "+55 129 039 391",
+      "status": "galactic"
+    },
+    {
+      "id": 4,
+      "codigo": "04",
+      "name": "Obi-Wan Kenobi",
+      "email": "kenobi@totvs.com.br",
+      "phone": "+55 094 585 060",
+      "status": "tatooine"
+    },
+    {
+      "id": 5,
+      "codigo": "05",
+      "name": "Luke Skywalker",
+      "email": "luke@totvs.com.br",
+      "phone": "+55 123 154 837",
+      "status": "galactic"
+    }
+  ]
+}

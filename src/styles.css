@@ -1,0 +1,8 @@
+/* You can add global styles to this file, and also import other style files */
+
+hr {
+  border: 0;
+  border-top: 1px solid #eee;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
