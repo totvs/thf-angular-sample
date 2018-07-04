@@ -36,8 +36,7 @@ export class ClientsService {
       .get(url)
       .map(response => {
         return new Customer(response);
-      })
-      .catch(this.handleError);
+      });
   }
 
   addClient(customer: Customer) {
@@ -67,11 +66,6 @@ export class ClientsService {
     return this
       .http
       .put(url, obj);
-  }
-
-  private handleError(error: Response | any) {
-    console.error(error.message || error);
-    return Observable.throw(error.status);
   }
 
 }
