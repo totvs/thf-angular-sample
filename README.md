@@ -1,27 +1,27 @@
 # ThfCrud
+Uma aplicação desenvolvida em [THF (Totvs HTML Framework)](https://thf.totvs.com.br/home) contendo um sample de cadastro de cliente.  
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.8.
+## Getting Started
+Essas instruções farão com que você tenha uma cópia do projeto em execução na sua máquina local para fins de desenvolvimento e teste.
 
-## Development server
+### Installing
+A simulação de serviço REST é realizada com [JSON Server](https://github.com/typicode/json-server). Ele é um projeto simples que ajuda você a configurar uma API REST com operações CRUD muito rapidamente.
+O JSON Server está disponível como um pacote NPM. A instalação pode ser feita usando o gerenciador de pacotes Node.js:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+`$ npm install -g json-server`
 
-## Code scaffolding
+No arquivo `db.json` contém os dados que devem ser expostos pela API REST.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Vamos iniciar o servidor JSON executando o seguinte comando:
 
-## Build
+`$ json-server --watch db.json`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Agora podemos abrir `http://localhost:3000/` no navegador e obteremos o resultado.
 
-## Running unit tests
+### A aplicação
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Esta aplicação já contém o escopo básico/inicial de um projeto. Execute o seguinte comando para subi-lá em um servidor local, dispobilizado pelas depedências do Angular CLI:
 
-## Running end-to-end tests
+`ng serve`
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Por padrão, o comando acima utiliza o seguinte caminho: `http://localhost:4200`.
