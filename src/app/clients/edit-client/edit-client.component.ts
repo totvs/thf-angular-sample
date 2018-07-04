@@ -33,8 +33,9 @@ export class EditClientComponent implements OnInit {
 
   public readonly editUserActions: Array<ThfPageAction> = [
     { label: 'Salvar Cliente', action: this.updateClient.bind(this, this.customer), icon: 'thf-icon-plus' },
-    { label: 'Deletar', action: () => this.modalDeleteUser.open() },
-    { label: 'Voltar', action: () => this.location.back() }
+    { label: 'Cancelar', action: () => this.location.back() },
+    { label: 'Imprimir', action: () => alert('Imprimir') },
+    { label: 'Excluir', action: () => this.modalDeleteUser.open() },
   ];
 
   public readonly editUserBreadcrumb: ThfBreadcrumb = {
@@ -101,13 +102,16 @@ export class EditClientComponent implements OnInit {
 
   addClient(customer: Customer) {
     this.clientsService.addClient(customer);
-    this.formModal.open();
+    this.router.navigate(['/clients']);
+    this.clientsService.getClients();
+    this.thfNotification.success('Cliente cadastrado com sucesso.');
+
   }
 
   deleteClient() {
     this.clientsService.deleteClient(this.customer.id).subscribe(data => {
       this.router.navigate(['/clients']);
-      this.thfNotification.success('O usuário foi excluído.');
+      this.thfNotification.success('O cliente foi excluído.');
     });
   }
 

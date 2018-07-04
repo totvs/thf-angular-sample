@@ -82,58 +82,6 @@
   </div>
 </thf-page-default>
 
-<thf-modal #formModal
-  t-title="Save successful"
-  [t-primary-action]="modalPrimaryAction">
-
-  <div class="thf-row">
-    <thf-info
-      class="thf-md-12"
-      t-label="Name"
-      [t-value]="customer.name">
-    </thf-info>
-  </div>
-  <hr>
-  <div class="thf-row">
-    <thf-info
-      class="thf-md-6"
-      t-label="E-mail"
-      [t-value]="customer.email">
-    </thf-info>
-    <thf-info
-      class="thf-md-6"
-      t-label="Telefone"
-      [t-value]="customer.phone">
-    </thf-info>
-    <thf-info
-      class="thf-md-6"
-      t-label="Data de nascimento"
-      [t-value]="customer.birthday">
-    </thf-info>
-  </div>
-  <hr>
-  <div class="thf-row">
-    <thf-info
-      class="thf-md-6"
-      t-label="Nacionalidade"
-      [t-value]="customer.nationality">
-    </thf-info>
-    <thf-info
-      class="thf-md-6"
-      t-label="Influência"
-      [t-value]="customer.status">
-    </thf-info>
-  </div>
-  <hr>
-  <div class="thf-row">
-    <thf-info
-      class="thf-md-6"
-      t-label="Características"
-      [t-value]="customer.personality | json">
-    </thf-info>
-  </div>
-</thf-modal>
-
 <thf-modal #modalDeleteUser
   t-close
   t-primary-label="Confirmar"
@@ -142,5 +90,5 @@
   [t-primary-action]="confirmDeleteAction"
   [t-secondary-action]="cancelDeleteAction">
 
-  <div class="thf-font-text-large thf-text-left">O usuário {{ customer.name }} não estará mais vínculado ao projeto.</div>
+  <div class="thf-font-text-large thf-text-left">O cliente {{ customer.name }} não estará mais vínculado ao projeto.</div>
 </thf-modal>

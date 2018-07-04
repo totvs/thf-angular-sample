@@ -30,7 +30,7 @@ export class ClientsComponent implements OnInit {
   public readonly actions: Array<ThfPageAction> = [
     { label: 'Adicionar Novo Cliente', action: () => this.router.navigate(['/new-client']), icon: 'thf-icon-plus' },
     { label: 'Imprimir', action: () => alert('Ação Imprimir')},
-    { label: 'acao', action: () => alert('Ação 1')},
+    { label: 'Exportar', action: () => alert('Exportando')},
     { label: 'acao2', action: () => alert('Ação 2') }
   ];
 
