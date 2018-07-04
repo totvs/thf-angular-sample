@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 
 import { ThfBreadcrumb } from '@totvs/thf-ui/components/thf-breadcrumb/thf-breadcrumb.interface';
 import { ThfPageAction, ThfPageFilter } from '@totvs/thf-ui/components/thf-page';
@@ -14,70 +15,44 @@ import { Customer } from './../shared/customer';
   templateUrl: './clients.component.html',
   styleUrls: ['./clients.component.css']
 })
-export class ClientsComponent implements OnInit {
+export class ClientsComponent implements OnInit, OnDestroy {
 
+  actions: Array<ThfPageAction>;
+  breadcrumb: ThfBreadcrumb;
+  columns: Array<ThfTableColumn>;
+  customerDetail: Array<ThfTableAction>;
   disclaimers = [];
   disclaimerGroup;
+  filterSettings: ThfPageFilter;
   items: Array<any>;
   itemsFiltered: Array<any>;
   labelFilter = '';
-  toolbarTitle: 'THF-CRUD';
-
   literals = {};
-  literalsEn = {};
-  literalsCrm = {};
-
-  customerDetail: Array<ThfTableAction> = [
-    { action: 'editCustomer', label: 'Editar' },
-  ];
-
-  public readonly actions: Array<ThfPageAction> = [
-    { label: 'Adicionar Novo Cliente', action: () => this.router.navigate(['/new-client']), icon: 'thf-icon-plus' },
-    { label: 'Imprimir', action: () => alert('Ação Imprimir')},
-    { label: 'Exportar', action: () => alert('Exportando')},
-    { label: 'acao2', action: () => alert('Ação 2') }
-  ];
-
-  public readonly columns: Array<ThfTableColumn> = [
-    { column: 'id', label: 'Código', type: 'string' },
-    { column: 'name', label: 'Nome' , type: 'link', action: (value, row) => { this.editCustomer(row); } },
-    { column: 'email', label: 'E-mail', type: 'string' },
-    { column: 'phone',  label: 'Telefone', type: 'string' },
-    { column: 'status', label: 'Influência', type: 'label', width: '5%', labels: [
-      { value: 'rebel', color: 'success', label: 'Rebel' },
-      { value: 'tatooine', color: 'warning', label: 'Tattoine' },
-      { value: 'galactic', color: 'danger', label: 'Galactic' }
-    ]},
-  ];
-
-  public readonly breadcrumb: ThfBreadcrumb = {
-    items: [
-      { label: 'Clientes', link: '/clients' }
-    ]
-  };
-
-  public readonly filterSettings: ThfPageFilter = {
-    action: 'filterAction',
-    ngModel: 'labelFilter',
-    placeholder: 'Search'
-  };
+  subscription: Subscription;
+  toolbarTitle: 'THF-CRUD';
 
   constructor(
     private clientsService: ClientsService,
     private router: Router,
     private thfI18nService: ThfI18nService
-  ) {
-    thfI18nService.getLiterals()
-    .subscribe(literals => {
-      this.literals = literals;
-    });
+  ) { }
 
-    // console.log(this.literals);
-
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   ngOnInit() {
-    this.getClients();
+
+    this.thfI18nService.getLiterals()
+    .subscribe(literals => {
+      this.literals = literals;
+      this.setLiteralsDefaultValues();
+    });
+
+    this.subscription = this.clientsService.getClients().subscribe(response => {
+      this.items = response;
+      this.itemsFiltered = [...this.items];
+    });
 
     this.disclaimerGroup = {
       title: 'Filters',
@@ -94,7 +69,6 @@ export class ClientsComponent implements OnInit {
   }
 
   editCustomer(customer: Customer) {
-    console.log(`ae`);
     this.router.navigate(['/edit', customer.id]);
   }
 
@@ -142,6 +116,39 @@ export class ClientsComponent implements OnInit {
   resetFilterHiringProcess() {
     this.itemsFiltered = [...this.items];
     this.labelFilter = '';
+  }
+
+  setLiteralsDefaultValues() {
+    this.actions = [
+      { label: this.literals['addNewClient'], action: () => this.router.navigate(['/new-client']), icon: 'thf-icon-plus' },
+      { label: this.literals['print'], action: () => alert('Ação Imprimir')},
+      { label: this.literals['export'], action: () => alert('Exportando')},
+      { label: this.literals['actions'], action: () => alert('Ação 2') }
+    ];
+    this.customerDetail = [
+      { action: 'editCustomer', label: this.literals['edit'] },
+    ];
+    this.columns = [
+      { column: 'id', label: this.literals['code'], type: 'string' },
+      { column: 'name', label: this.literals['name'] , type: 'link', action: (value, row) => { this.editCustomer(row); } },
+      { column: 'email', label: this.literals['email'], type: 'string' },
+      { column: 'phone',  label: this.literals['phone'], type: 'string' },
+      { column: 'status', label: this.literals['influency'], type: 'label', width: '5%', labels: [
+        { value: 'rebel', color: 'success', label: 'Rebel' },
+        { value: 'tatooine', color: 'warning', label: 'Tattoine' },
+        { value: 'galactic', color: 'danger', label: 'Galactic' }
+      ]},
+    ];
+    this.breadcrumb = {
+      items: [
+        { label: this.literals['clients'], link: '/clients' }
+      ]
+    };
+    this.filterSettings = {
+      action: 'filterAction',
+      ngModel: 'labelFilter',
+      placeholder: this.literals['search']
+    };
   }
 
 }

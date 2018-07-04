@@ -3,10 +3,11 @@
     {
       "id": 1,
       "codigo": "01",
-      "name": "Hanz Solo",
+      "name": "Han Solo",
       "email": "han@totvs.com.br",
       "phone": "+55 430 123 234",
-      "status": "rebel"
+      "status": "rebel",
+      "nationality": "deathstar"
     },
     {
       "id": 2,
@@ -39,10 +40,6 @@
       "email": "luke@totvs.com.br",
       "phone": "+55 123 154 837",
       "status": "galactic"
-    },
-    {
-      "name": "matheus",
-      "id": 6
     }
   ]
 }

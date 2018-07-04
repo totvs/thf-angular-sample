@@ -1,6 +1,6 @@
 <thf-page-list
 t-show-more-disabled="true"
-  t-title="Clientes"
+  [t-title]= "literals?.clients"
   [t-actions]="actions"
   [t-breadcrumb]="breadcrumb"
   [t-disclaimer-group]="disclaimerGroup"
@@ -11,7 +11,5 @@ t-show-more-disabled="true"
     [t-columns]="columns"
     [t-items]="itemsFiltered">
   </thf-table>
-
-<h1>{{ literals?.add }}</h1>
-
 </thf-page-list>
+

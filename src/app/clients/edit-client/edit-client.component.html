@@ -1,7 +1,7 @@
 <thf-page-default 
   [t-actions]="pageEditActions ? editUserActions : newUserActions"
   [t-breadcrumb]="pageEditActions ? editUserBreadcrumb : newUserBreadcrumb"
-  [t-title]="pageEditActions ? 'Editar Cliente' : 'Adicionar Cliente'">
+  [t-title]="pageEditActions ? literals?.editClient : literals?.addNewClient">
 
   <div class="thf-row">
     <div class="thf-lg-6 thf-offset-lg-3 thf-xl-6 thf-offset-xl-3">
@@ -12,7 +12,7 @@
             name="name"
             [(ngModel)]="customer.name"
             t-clean
-            t-label="Nome"
+            [t-label]="literals?.name"
             t-minlength="3"
             t-placeholder="Insira o Nome"
             t-required>
@@ -22,7 +22,7 @@
             name="email"
             [(ngModel)]="customer.email"
             t-clean
-            t-label="Email"
+            [t-label]="literals?.email"
             t-placeholder="Insira o Email"
             t-required>
           </thf-email>
@@ -31,7 +31,7 @@
             name="phone"
             [(ngModel)]="customer.phone"
             t-clean
-            t-label="Telefone"
+            [t-label]="literals?.phone"
             t-placeholder="Insira o Telefone"
             t-mask="(99) 99999?-9999"
             t-required>
@@ -44,7 +44,7 @@
             name="birthday"
             [(ngModel)]="customer.birthday"
             t-format="dd/mm/yyyy"
-            t-label="Data de nascimento">
+            [t-label]="literals?.birthday">
           </thf-datepicker>
         </div>
 
@@ -53,14 +53,14 @@
             class="thf-md-6"
             name="nationality"
             [(ngModel)]="customer.nationality"
-            t-label="Nacionalidade"
+            [t-label]="literals?.nationality"
             [t-options]="nationalityOptions">
           </thf-select>
           <thf-select
             class="thf-md-6"
             name="status"
             [(ngModel)]="customer.status"
-            t-label="Influência"
+            [t-label]="literals?.influency"
             [t-options]="statusOptions">
           </thf-select>
         </div>
@@ -70,7 +70,7 @@
             <thf-checkbox-group
               name="personality"
               [(ngModel)]="customer.personality"
-              t-label="Características"
+              [t-label]="literals?.personality"
               [t-options]="personalityOptions">
             </thf-checkbox-group>
           </div>
@@ -84,11 +84,10 @@
 
 <thf-modal #modalDeleteUser
   t-close
-  t-primary-label="Confirmar"
   t-size="sm"
-  t-title="Tem certeza que deseja excluir?"
+  [t-title]="literals?.modalDeleteTitle"
   [t-primary-action]="confirmDeleteAction"
   [t-secondary-action]="cancelDeleteAction">
 
-  <div class="thf-font-text-large thf-text-left">O cliente {{ customer.name }} não estará mais vínculado ao projeto.</div>
+  <div class="thf-font-text-large thf-text-left">{{ literals?.modalDeleteMessage | thfI18n:[customer.name] }}</div>
 </thf-modal>
