@@ -20,12 +20,11 @@ export class ClientsService {
     const url = this.apiUrl;
 
     return this
-            .http
-            .get(url)
-            .map(response => {
-              return response;
-            })
-            .catch(this.handleError);
+      .http
+      .get(url)
+      .map(response => {
+        return response;
+      });
   }
 
   getClient(id: string): Observable<Customer> {
