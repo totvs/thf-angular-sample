@@ -14,18 +14,6 @@ export class ClientsService {
 
   apiUrl = 'http://localhost:3000/clients';
 
-  public readonly columns: Array<ThfTableColumn> = [
-    { column: 'id', label: 'Código', type: 'string' },
-    { column: 'name', label: 'Nome', type: 'string' },
-    { column: 'email', label: 'E-mail', type: 'string' },
-    { column: 'phone',  label: 'Telefone', type: 'string' },
-    { column: 'status', label: 'Influência', type: 'label', width: '5%', labels: [
-      { value: 'rebel', color: 'success', label: 'Rebel' },
-      { value: 'tatooine', color: 'warning', label: 'Tattoine' },
-      { value: 'galactic', color: 'danger', label: 'Galactic' }
-    ]},
-  ];
-
   constructor(private http: HttpClient) { }
 
   public getClients() {

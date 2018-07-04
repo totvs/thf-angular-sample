@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 
 import { ThfBreadcrumb } from '@totvs/thf-ui/components/thf-breadcrumb/thf-breadcrumb.interface';
 import { ThfPageAction, ThfPageFilter } from '@totvs/thf-ui/components/thf-page';
-import { ThfTableAction } from '@totvs/thf-ui/components/thf-table';
+import { ThfTableAction, ThfTableColumn } from '@totvs/thf-ui/components/thf-table';
+import { ThfI18nService } from '@totvs/thf-ui/services/thf-i18n/thf-i18n.service';
 
 import { ClientsService } from './services/clients.service';
 import { Customer } from './../shared/customer';
@@ -15,13 +16,16 @@ import { Customer } from './../shared/customer';
 })
 export class ClientsComponent implements OnInit {
 
-  columns: Array<any>;
   disclaimers = [];
   disclaimerGroup;
   items: Array<any>;
   itemsFiltered: Array<any>;
   labelFilter = '';
   toolbarTitle: 'THF-CRUD';
+
+  literals = {};
+  literalsEn = {};
+  literalsCrm = {};
 
   customerDetail: Array<ThfTableAction> = [
     { action: 'editCustomer', label: 'Editar' },
@@ -32,6 +36,18 @@ export class ClientsComponent implements OnInit {
     { label: 'Imprimir', action: () => alert('Ação Imprimir')},
     { label: 'Exportar', action: () => alert('Exportando')},
     { label: 'acao2', action: () => alert('Ação 2') }
+  ];
+
+  public readonly columns: Array<ThfTableColumn> = [
+    { column: 'id', label: 'Código', type: 'string' },
+    { column: 'name', label: 'Nome' , type: 'link', action: (value, row) => { this.editCustomer(row); } },
+    { column: 'email', label: 'E-mail', type: 'string' },
+    { column: 'phone',  label: 'Telefone', type: 'string' },
+    { column: 'status', label: 'Influência', type: 'label', width: '5%', labels: [
+      { value: 'rebel', color: 'success', label: 'Rebel' },
+      { value: 'tatooine', color: 'warning', label: 'Tattoine' },
+      { value: 'galactic', color: 'danger', label: 'Galactic' }
+    ]},
   ];
 
   public readonly breadcrumb: ThfBreadcrumb = {
@@ -46,10 +62,21 @@ export class ClientsComponent implements OnInit {
     placeholder: 'Search'
   };
 
-  constructor( private clientsService: ClientsService, private router: Router ) { }
+  constructor(
+    private clientsService: ClientsService,
+    private router: Router,
+    private thfI18nService: ThfI18nService
+  ) {
+    thfI18nService.getLiterals()
+    .subscribe(literals => {
+      this.literals = literals;
+    });
+
+    // console.log(this.literals);
+
+  }
 
   ngOnInit() {
-    this.columns = this.clientsService.columns;
     this.getClients();
 
     this.disclaimerGroup = {
@@ -67,6 +94,7 @@ export class ClientsComponent implements OnInit {
   }
 
   editCustomer(customer: Customer) {
+    console.log(`ae`);
     this.router.navigate(['/edit', customer.id]);
   }
 

@@ -6,10 +6,27 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { ThfModule } from '@totvs/thf-ui';
+import { ThfI18nConfig, ThfI18nModule } from '@totvs/thf-ui/services/thf-i18n';
+
+import { generalEn } from './literals/i18n/general-en';
+import { generalPt } from './literals/i18n/general-pt';
 
 import { AppComponent } from './app.component';
 import { ClientsModule } from './clients/clients.module';
 import { AppRoutingModule } from './app-routing.module';
+
+const i18nConfig: ThfI18nConfig = {
+  default: {
+    context: 'general',
+    cache: true
+  },
+  contexts: {
+    general: {
+      'pt-BR': generalPt,
+      'en-US': generalEn
+    },
+  }
+};
 
 @NgModule({
   declarations: [
@@ -18,12 +35,13 @@ import { AppRoutingModule } from './app-routing.module';
   imports: [
     AppRoutingModule,
     BrowserModule,
+    ClientsModule,
     CommonModule,
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot([]),
     ThfModule,
-    ClientsModule,
+    ThfI18nModule.config(i18nConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]
