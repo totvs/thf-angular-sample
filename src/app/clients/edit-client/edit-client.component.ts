@@ -73,15 +73,6 @@ export class EditClientComponent implements OnInit {
     });
   }
 
-  updateClient() {
-      this.clientsService.updateClient(this.customer).subscribe(() => {
-        this.clientsService.getClients();
-        this.router.navigate(['/clients']);
-        this.thfNotification.success('Alteração efetuada com sucesso.');
-      });
-
-  }
-
   deleteClient() {
     this.clientsService.deleteClient(this.customer.id).subscribe(data => {
       this.router.navigate(['/clients']);
@@ -150,6 +141,12 @@ export class EditClientComponent implements OnInit {
     ];
   }
 
-
+  updateClient() {
+    this.clientsService.updateClient(this.customer).subscribe(() => {
+      this.clientsService.getClients();
+      this.router.navigate(['/clients']);
+      this.thfNotification.success('Alteração efetuada com sucesso.');
+    });
+  }
 
 }

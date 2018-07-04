@@ -132,7 +132,7 @@ export class ClientsComponent implements OnInit, OnDestroy {
       { column: 'id', label: this.literals['code'], type: 'string' },
       { column: 'name', label: this.literals['name'] , type: 'link', action: (value, row) => { this.editCustomer(row); } },
       { column: 'email', label: this.literals['email'], type: 'string' },
-      { column: 'phone',  label: this.literals['phone'], type: 'string' },
+      { column: 'phone', label: this.literals['phone'], type: 'string' },
       { column: 'status', label: this.literals['influency'], type: 'label', width: '5%', labels: [
         { value: 'rebel', color: 'success', label: 'Rebel' },
         { value: 'tatooine', color: 'warning', label: 'Tattoine' },
