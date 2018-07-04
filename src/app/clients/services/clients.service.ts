@@ -46,8 +46,7 @@ export class ClientsService {
 
     return this
       .http
-      .post(url, obj)
-      .subscribe(() => this.getClients());
+      .post(url, obj);
   }
 
   deleteClient(id: string) {
@@ -65,10 +64,9 @@ export class ClientsService {
     const url = this.apiUrl + '/' + customer.id;
 
     const obj = customer;
-    this
+    return this
       .http
-      .put(url, obj)
-      .subscribe(() => this.getClients());
+      .put(url, obj);
   }
 
   private handleError(error: Response | any) {

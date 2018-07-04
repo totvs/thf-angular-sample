@@ -66,9 +66,20 @@ export class EditClientComponent implements OnInit {
   }
 
   addClient(customer: Customer) {
-    this.clientsService.addClient(customer);
-    this.router.navigate(['/clients']);
-    this.thfNotification.success('Cliente cadastrado com sucesso.');
+    this.clientsService.addClient(customer).subscribe(() => {
+      this.clientsService.getClients();
+      this.router.navigate(['/clients']);
+      this.thfNotification.success('Cliente cadastrado com sucesso.');
+    });
+  }
+
+  updateClient() {
+      this.clientsService.updateClient(this.customer).subscribe(() => {
+        this.clientsService.getClients();
+        this.router.navigate(['/clients']);
+        this.thfNotification.success('Alteração efetuada com sucesso.');
+      });
+
   }
 
   deleteClient() {
@@ -139,12 +150,6 @@ export class EditClientComponent implements OnInit {
     ];
   }
 
-  updateClient() {
-    this.route.params.subscribe(params => {
-      this.clientsService.updateClient(this.customer);
-      this.router.navigate(['/clients']);
-      this.thfNotification.success('Alteração efetuada com sucesso.');
-    });
-  }
+
 
 }
