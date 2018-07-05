@@ -1,10 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { Subscription } from 'rxjs/Subscription';
 
 import { ThfBreadcrumb } from '@totvs/thf-ui/components/thf-breadcrumb/thf-breadcrumb.interface';
+import { ThfDisclaimer } from '@totvs/thf-ui/components/thf-disclaimer/thf-disclaimer.interface';
+import { ThfDisclaimerGroup } from '@totvs/thf-ui/components/thf-disclaimer-group';
 import { ThfPageAction, ThfPageFilter } from '@totvs/thf-ui/components/thf-page';
-import { ThfTableAction, ThfTableColumn } from '@totvs/thf-ui/components/thf-table';
+import { ThfTableColumn } from '@totvs/thf-ui/components/thf-table';
 import { ThfI18nService } from '@totvs/thf-ui/services/thf-i18n/thf-i18n.service';
 
 import { ClientsService } from './services/clients.service';
@@ -15,21 +18,27 @@ import { Customer } from './../shared/customer';
   templateUrl: './clients.component.html',
   styleUrls: ['./clients.component.css']
 })
-export class ClientsComponent implements OnInit, OnDestroy {
+export class ClientsComponent implements OnDestroy, OnInit {
 
-  actions: Array<ThfPageAction>;
+  pageActions: Array<ThfPageAction>;
+  tableActions: Array<ThfPageAction>;
+
   breadcrumb: ThfBreadcrumb;
-  columns: Array<ThfTableColumn>;
-  customerDetail: Array<ThfTableAction>;
-  disclaimers = [];
-  disclaimerGroup;
+  disclaimerGroup: ThfDisclaimerGroup;
   filterSettings: ThfPageFilter;
-  items: Array<any>;
-  itemsFiltered: Array<any>;
+
+  columns: Array<ThfTableColumn>;
+  items: Array<Customer>;
+  itemsFiltered: Array<Customer>;
+
+  isLoading: boolean = true;
   labelFilter = '';
   literals = {};
-  subscription: Subscription;
-  toolbarTitle: 'THF-CRUD';
+
+  private disclaimers: Array<ThfDisclaimer> = [];
+
+  private customersSubscription: Subscription;
+  private literalsSubscription: Subscription;
 
   constructor(
     private clientsService: ClientsService,
@@ -38,21 +47,18 @@ export class ClientsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.customersSubscription.unsubscribe();
+    this.literalsSubscription.unsubscribe();
   }
 
   ngOnInit() {
 
-    this.thfI18nService.getLiterals()
-    .subscribe(literals => {
+    this.literalsSubscription = this.thfI18nService.getLiterals().subscribe(literals => {
       this.literals = literals;
       this.setLiteralsDefaultValues();
     });
 
-    this.subscription = this.clientsService.getClients().subscribe(response => {
-      this.items = response;
-      this.itemsFiltered = [...this.items];
-    });
+    this.getClients();
 
     this.disclaimerGroup = {
       title: 'Filters',
@@ -61,18 +67,23 @@ export class ClientsComponent implements OnInit, OnDestroy {
     };
   }
 
-  applyFilters(filters) {
+  filterAction() {
+    this.populateDisclaimers([this.labelFilter]);
+    this.filter();
+  }
+
+  private applyFilters(filters) {
     this.itemsFiltered = this.items.filter(item => {
       return Object.keys(item)
       .some(key => (!(item[key] instanceof Object) && this.includeFilter(item[key], filters)));
     });
   }
 
-  editCustomer(customer: Customer) {
+  private editCustomer(customer: Customer) {
     this.router.navigate(['/edit', customer.id]);
   }
 
-  filter() {
+  private filter() {
     const filters = this.disclaimers.map(disclaimer => disclaimer.value);
     if (this.itemsFiltered) {
       this.applyFilters(filters);
@@ -82,28 +93,25 @@ export class ClientsComponent implements OnInit, OnDestroy {
     }
   }
 
-  filterAction() {
-    this.populateDisclaimers([this.labelFilter]);
-    this.filter();
-  }
-
-  getClients() {
-    this.clientsService.getClients().subscribe(response => {
-      this.items = response;
+  private getClients() {
+    this.customersSubscription = this.clientsService.getClients().subscribe((customers: Array<Customer>) => {
+      this.items = customers;
       this.itemsFiltered = [...this.items];
+
+      this.isLoading = false;
     });
   }
 
-  includeFilter(item, filters) {
+  private includeFilter(item, filters) {
     return filters.some(filter => String(item).toLocaleLowerCase().includes(filter.toLocaleLowerCase()));
   }
 
-  onChangeDisclaimer(disclaimers) {
+  private onChangeDisclaimer(disclaimers) {
     this.disclaimers = disclaimers;
     this.filter();
   }
 
-  populateDisclaimers(filters: Array<any>) {
+  private populateDisclaimers(filters: Array<any>) {
     this.disclaimers = filters.map(value => ({ value }));
 
     if (this.disclaimers && this.disclaimers.length > 0) {
@@ -113,24 +121,26 @@ export class ClientsComponent implements OnInit, OnDestroy {
     }
   }
 
-  resetFilterHiringProcess() {
+  private resetFilterHiringProcess() {
     this.itemsFiltered = [...this.items];
     this.labelFilter = '';
   }
 
-  setLiteralsDefaultValues() {
-    this.actions = [
+  private setLiteralsDefaultValues() {
+    this.pageActions = [
       { label: this.literals['addNewClient'], action: () => this.router.navigate(['/new-client']), icon: 'thf-icon-plus' },
       { label: this.literals['print'], action: () => alert('Ação Imprimir')},
       { label: this.literals['export'], action: () => alert('Exportando')},
       { label: this.literals['actions'], action: () => alert('Ação 2') }
     ];
-    this.customerDetail = [
-      { action: 'editCustomer', label: this.literals['edit'] },
+
+    this.tableActions = [
+      { action: this.editCustomer.bind(this), label: this.literals['edit'] },
     ];
+
     this.columns = [
       { column: 'id', label: this.literals['code'], type: 'string' },
-      { column: 'name', label: this.literals['name'] , type: 'link', action: (value, row) => { this.editCustomer(row); } },
+      { column: 'name', label: this.literals['name'] , type: 'link', action: (value, row) => this.editCustomer(row) },
       { column: 'email', label: this.literals['email'], type: 'string' },
       { column: 'phone', label: this.literals['phone'], type: 'string' },
       { column: 'status', label: this.literals['influency'], type: 'label', width: '5%', labels: [
@@ -139,11 +149,13 @@ export class ClientsComponent implements OnInit, OnDestroy {
         { value: 'galactic', color: 'danger', label: 'Galactic' }
       ]},
     ];
+
     this.breadcrumb = {
       items: [
         { label: this.literals['clients'], link: '/clients' }
       ]
     };
+
     this.filterSettings = {
       action: 'filterAction',
       ngModel: 'labelFilter',

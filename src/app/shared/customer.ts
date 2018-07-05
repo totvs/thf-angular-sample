@@ -9,6 +9,6 @@ export class Customer {
   status: string;
 
   constructor(values: Object = {}) {
-      Object.assign(this, values);
+    Object.assign(this, values);
   }
 }

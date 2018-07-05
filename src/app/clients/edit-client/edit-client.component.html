@@ -1,7 +1,7 @@
-<thf-page-default 
-  [t-actions]="pageEditActions ? editUserActions : newUserActions"
-  [t-breadcrumb]="pageEditActions ? editUserBreadcrumb : newUserBreadcrumb"
-  [t-title]="pageEditActions ? literals?.editClient : literals?.addNewClient">
+<thf-page-default
+  [t-actions]="isPageEdit ? editUserActions : newUserActions"
+  [t-breadcrumb]="isPageEdit ? editUserBreadcrumb : newUserBreadcrumb"
+  [t-title]="isPageEdit ? literals?.editClient : literals?.addNewClient">
 
   <div class="thf-row">
     <div class="thf-lg-6 thf-offset-lg-3 thf-xl-6 thf-offset-xl-3">

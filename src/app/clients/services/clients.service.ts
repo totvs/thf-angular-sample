@@ -1,70 +1,43 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-
-import { ThfTableColumn } from '@totvs/thf-ui/components/thf-table';
 
 import { Customer } from './../../shared/customer';
 
 @Injectable()
 export class ClientsService {
 
-  apiUrl = 'http://localhost:3000/clients';
+  private apiUrl = 'http://localhost:3000/clients';
 
   constructor(private http: HttpClient) { }
 
-  public getClients() {
-    const url = this.apiUrl;
-
-    return this
-      .http
-      .get(url)
-      .map(response => {
-        return response;
-      });
+  getClients() {
+    return this.http.get(this.apiUrl);
   }
 
   getClient(id: string): Observable<Customer> {
-    const url = this.apiUrl + '/' + id;
 
-    return this
-      .http
-      .get(url)
-      .map(response => {
-        return new Customer(response);
-      });
+    return this.http.get(`${this.apiUrl}/${id}`).map(response => {
+      return new Customer(response);
+    });
   }
 
   addClient(customer: Customer) {
-    const url = this.apiUrl;
-    const obj = customer;
-
-    return this
-      .http
-      .post(url, obj);
+    return this.http.post(this.apiUrl, customer);
   }
 
   deleteClient(id: string) {
-    const url = this.apiUrl + '/' + id;
-
-    return this
-      .http
-      .delete(url)
-      .map(response => {
-        return response;
-      });
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
   updateClient(customer) {
-    const url = this.apiUrl + '/' + customer.id;
+    const url = `${this.apiUrl}/${customer.id}`;
 
-    const obj = customer;
-    return this
-      .http
-      .put(url, obj);
+    return this.http.put(url, customer);
   }
 
 }
