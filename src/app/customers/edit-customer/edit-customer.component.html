@@ -75,6 +75,22 @@
             </thf-checkbox-group>
           </div>
         </div>
+
+        <div class="thf-row">
+          <thf-lookup
+            class="thf-md-6"
+            name="hero"
+            [(ngModel)]="hero"
+            t-field-label="label"
+            t-field-value="label"
+            t-help="Select hero for mission"
+            t-label="Hero"
+            t-required
+            t-title="Heroes available for mission"
+            [t-columns]="columns"
+            [t-filter-service]="lookupService">
+          </thf-lookup>
+        </div>
       </form>
     </div>
   </div>

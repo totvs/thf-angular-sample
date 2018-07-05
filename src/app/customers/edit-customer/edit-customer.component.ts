@@ -5,15 +5,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
 import { ThfBreadcrumb } from '@totvs/thf-ui/components/thf-breadcrumb/thf-breadcrumb.interface';
-import { ThfCheckboxGroupOption, ThfSelectOption } from '@totvs/thf-ui/components/thf-field';
+import { ThfCheckboxGroupOption, ThfLookupColumn, ThfSelectOption } from '@totvs/thf-ui/components/thf-field';
 import { ThfI18nService } from '@totvs/thf-ui/services/thf-i18n';
 import { ThfModalAction } from '@totvs/thf-ui/components/thf-modal';
 import { ThfModalComponent } from '@totvs/thf-ui/components/thf-modal/thf-modal.component';
 import { ThfNotificationService } from '@totvs/thf-ui/services/thf-notification/thf-notification.service';
 import { ThfPageAction } from '@totvs/thf-ui/components/thf-page';
 
-import { CustomersService } from '../../services/customers.service';
 import { Customer } from './../../shared/customer';
+import { CustomersLookupService } from '../../services/costumers-lookup.service';
+import { CustomersService } from '../../services/customers.service';
 
 @Component({
   selector: 'app-edit-customer',
@@ -36,6 +37,13 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
   literals = {};
   isPageEdit: boolean;
   personalityOptions: Array<ThfCheckboxGroupOption>;
+
+  hero: string;
+
+  public readonly columns: Array<ThfLookupColumn> = [
+    { column: 'nickname', label: 'Hero' },
+    { column: 'label', label: 'Name' }
+  ];
 
   readonly nationalityOptions: Array<ThfSelectOption> = [
     { label: 'Coruscant', value: 'coruscant' },
@@ -60,7 +68,8 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private thfI18nService: ThfI18nService,
-    public thfNotification: ThfNotificationService
+    public lookupService: CustomersLookupService,
+    public thfNotification: ThfNotificationService,
   ) { }
 
   ngOnDestroy() {

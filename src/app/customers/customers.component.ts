@@ -12,6 +12,7 @@ import { ThfI18nService } from '@totvs/thf-ui/services/thf-i18n/thf-i18n.service
 
 import { CustomersService } from '../services/customers.service';
 import { Customer } from './../shared/customer';
+import { TotvsResponse } from './customers.interface';
 
 @Component({
   selector: 'app-customers',
@@ -94,8 +95,8 @@ export class CustomersComponent implements OnDestroy, OnInit {
   }
 
   private getCustomers() {
-    this.customersSubscription = this.customersService.getCustomers().subscribe((customers: Array<Customer>) => {
-      this.items = customers;
+    this.customersSubscription = this.customersService.getCustomers().subscribe((customers: TotvsResponse) => {
+      this.items = customers.items;
       this.itemsFiltered = [...this.items];
 
       this.isLoading = false;
