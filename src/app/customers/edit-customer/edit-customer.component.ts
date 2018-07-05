@@ -16,11 +16,11 @@ import { CustomersService } from '../../services/customers.service';
 import { Customer } from './../../shared/customer';
 
 @Component({
-  selector: 'thf-edit-client',
-  templateUrl: './edit-client.component.html',
-  styleUrls: ['./edit-client.component.css']
+  selector: 'app-edit-customer',
+  templateUrl: './edit-customer.component.html',
+  styleUrls: ['./edit-customer.component.css']
 })
-export class EditClientComponent implements OnInit, OnDestroy {
+export class EditCustomerComponent implements OnInit, OnDestroy {
 
   cancelDeleteAction: ThfModalAction;
   confirmDeleteAction: ThfModalAction;
@@ -121,14 +121,14 @@ export class EditClientComponent implements OnInit, OnDestroy {
     this.editUserBreadcrumb = {
       items: [
         { label: this.literals['customers'], link: '/customers' },
-        { label: this.literals['editClient'], link: '/customers/edit-client' }
+        { label: this.literals['editClient'], link: '/customers/edit-customer' }
       ]
     };
 
     this.newUserBreadcrumb = {
       items: [
         { label: this.literals['customers'], link: '/customers' },
-        { label: this.literals['addNewClient'], link: '/customers/new-client' }
+        { label: this.literals['addNewClient'], link: '/customers/new-customer' }
       ]
     };
 

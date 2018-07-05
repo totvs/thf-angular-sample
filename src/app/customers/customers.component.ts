@@ -14,11 +14,11 @@ import { CustomersService } from '../services/customers.service';
 import { Customer } from './../shared/customer';
 
 @Component({
-  selector: 'thf-clients',
-  templateUrl: './clients.component.html',
-  styleUrls: ['./clients.component.css']
+  selector: 'app-customers',
+  templateUrl: './customers.component.html',
+  styleUrls: ['./customers.component.css']
 })
-export class ClientsComponent implements OnDestroy, OnInit {
+export class CustomersComponent implements OnDestroy, OnInit {
 
   pageActions: Array<ThfPageAction>;
   tableActions: Array<ThfPageAction>;
@@ -128,7 +128,7 @@ export class ClientsComponent implements OnDestroy, OnInit {
 
   private setLiteralsDefaultValues() {
     this.pageActions = [
-      { label: this.literals['addNewClient'], action: () => this.router.navigate(['/new-client']), icon: 'thf-icon-plus' },
+      { label: this.literals['addNewClient'], action: () => this.router.navigate(['/new-customer']), icon: 'thf-icon-plus' },
       { label: this.literals['print'], action: () => alert('Ação Imprimir')},
       { label: this.literals['export'], action: () => alert('Exportando')},
       { label: this.literals['actions'], action: () => alert('Ação 2') }

@@ -12,7 +12,7 @@ import { generalEn } from './literals/i18n/general-en';
 import { generalPt } from './literals/i18n/general-pt';
 
 import { AppComponent } from './app.component';
-import { ClientsModule } from './clients/clients.module';
+import { CustomersModule } from './customers/customers.module';
 import { AppRoutingModule } from './app-routing.module';
 
 const i18nConfig: ThfI18nConfig = {
@@ -35,7 +35,7 @@ const i18nConfig: ThfI18nConfig = {
   imports: [
     AppRoutingModule,
     BrowserModule,
-    ClientsModule,
+    CustomersModule,
     CommonModule,
     FormsModule,
     HttpClientModule,

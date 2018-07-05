@@ -6,9 +6,9 @@ import { RouterModule } from '@angular/router';
 
 import { ThfModule } from '@totvs/thf-ui';
 
-import { ClientsComponent } from './clients.component';
+import { CustomersComponent } from './customers.component';
 import { CustomersService } from '../services/customers.service';
-import { EditClientComponent } from './edit-client/edit-client.component';
+import { EditCustomerComponent } from './edit-customer/edit-customer.component';
 
 @NgModule({
   imports: [
@@ -19,12 +19,12 @@ import { EditClientComponent } from './edit-client/edit-client.component';
     RouterModule
   ],
   declarations: [
-    ClientsComponent,
-    EditClientComponent
+    CustomersComponent,
+    EditCustomerComponent
   ],
   exports: [
-    ClientsComponent
+    CustomersComponent
   ],
   providers: [CustomersService],
 })
-export class ClientsModule { }
+export class CustomersModule { }
