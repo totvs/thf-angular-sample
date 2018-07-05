@@ -4,7 +4,7 @@ export const generalEn = {
   add: 'Add',
   addNewClient: 'Add New Client',
   birthday: 'Birthday Date',
-  clients: 'Clients',
+  customers: 'Customers',
   code: 'Code',
   confirm: 'Confirmar',
   controller: 'Controlador',

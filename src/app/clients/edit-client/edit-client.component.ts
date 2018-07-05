@@ -12,7 +12,7 @@ import { ThfModalComponent } from '@totvs/thf-ui/components/thf-modal/thf-modal.
 import { ThfNotificationService } from '@totvs/thf-ui/services/thf-notification/thf-notification.service';
 import { ThfPageAction } from '@totvs/thf-ui/components/thf-page';
 
-import { ClientsService } from './../services/clients.service';
+import { CustomersService } from '../../services/customers.service';
 import { Customer } from './../../shared/customer';
 
 @Component({
@@ -55,7 +55,7 @@ export class EditClientComponent implements OnInit, OnDestroy {
   @ViewChild('modalDeleteUser') modalDeleteUser: ThfModalComponent;
 
   constructor(
-    private clientsService: ClientsService,
+    private customersService: CustomersService,
     private location: Location,
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -78,15 +78,15 @@ export class EditClientComponent implements OnInit, OnDestroy {
   }
 
   private addClient(customer: Customer) {
-    this.clientsService.addClient(customer).subscribe(() => {
-      this.router.navigate(['/clients']);
+    this.customersService.addClient(customer).subscribe(() => {
+      this.router.navigate(['/customers']);
       this.thfNotification.success('Cliente cadastrado com sucesso.');
     });
   }
 
   private deleteClient() {
-    this.clientsService.deleteClient(this.customer.id).subscribe(data => {
-      this.router.navigate(['/clients']);
+    this.customersService.deleteClient(this.customer.id).subscribe(data => {
+      this.router.navigate(['/customers']);
       this.thfNotification.success('O cliente foi excluído.');
     });
   }
@@ -97,7 +97,7 @@ export class EditClientComponent implements OnInit, OnDestroy {
     if (id) {
       this.isPageEdit = true;
 
-      this.clientsService.getClient(id).subscribe((customer: Customer) => {
+      this.customersService.getClient(id).subscribe((customer: Customer) => {
         this.customer = customer;
       });
     }
@@ -120,15 +120,15 @@ export class EditClientComponent implements OnInit, OnDestroy {
 
     this.editUserBreadcrumb = {
       items: [
-        { label: this.literals['clients'], link: '/clients' },
-        { label: this.literals['editClient'], link: '/clients/edit-client' }
+        { label: this.literals['customers'], link: '/customers' },
+        { label: this.literals['editClient'], link: '/customers/edit-client' }
       ]
     };
 
     this.newUserBreadcrumb = {
       items: [
-        { label: this.literals['clients'], link: '/clients' },
-        { label: this.literals['addNewClient'], link: '/clients/new-client' }
+        { label: this.literals['customers'], link: '/customers' },
+        { label: this.literals['addNewClient'], link: '/customers/new-client' }
       ]
     };
 
@@ -155,8 +155,8 @@ export class EditClientComponent implements OnInit, OnDestroy {
   }
 
   private updateClient() {
-    this.clientsService.updateClient(this.customer).subscribe(() => {
-      this.router.navigate(['/clients']);
+    this.customersService.updateClient(this.customer).subscribe(() => {
+      this.router.navigate(['/customers']);
       this.thfNotification.success('Alteração efetuada com sucesso.');
     });
   }

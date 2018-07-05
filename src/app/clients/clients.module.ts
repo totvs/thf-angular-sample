@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { ThfModule } from '@totvs/thf-ui';
 
 import { ClientsComponent } from './clients.component';
-import { ClientsService } from './services/clients.service';
+import { CustomersService } from '../services/customers.service';
 import { EditClientComponent } from './edit-client/edit-client.component';
 
 @NgModule({
@@ -25,6 +25,6 @@ import { EditClientComponent } from './edit-client/edit-client.component';
   exports: [
     ClientsComponent
   ],
-  providers: [ClientsService],
+  providers: [CustomersService],
 })
 export class ClientsModule { }

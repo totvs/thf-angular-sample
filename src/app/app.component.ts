@@ -10,6 +10,6 @@ export class AppComponent {
   titleToolbar = 'THF-CRUD';
 
   menus = [
-    { label: 'Clients', link: './clients' },
+    { label: 'Customers', link: './customers' },
   ];
 }

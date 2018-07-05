@@ -10,7 +10,7 @@ import { ThfPageAction, ThfPageFilter } from '@totvs/thf-ui/components/thf-page'
 import { ThfTableColumn } from '@totvs/thf-ui/components/thf-table';
 import { ThfI18nService } from '@totvs/thf-ui/services/thf-i18n/thf-i18n.service';
 
-import { ClientsService } from './services/clients.service';
+import { CustomersService } from '../services/customers.service';
 import { Customer } from './../shared/customer';
 
 @Component({
@@ -41,7 +41,7 @@ export class ClientsComponent implements OnDestroy, OnInit {
   private literalsSubscription: Subscription;
 
   constructor(
-    private clientsService: ClientsService,
+    private customersService: CustomersService,
     private router: Router,
     private thfI18nService: ThfI18nService
   ) { }
@@ -94,7 +94,7 @@ export class ClientsComponent implements OnDestroy, OnInit {
   }
 
   private getClients() {
-    this.customersSubscription = this.clientsService.getClients().subscribe((customers: Array<Customer>) => {
+    this.customersSubscription = this.customersService.getClients().subscribe((customers: Array<Customer>) => {
       this.items = customers;
       this.itemsFiltered = [...this.items];
 
@@ -152,7 +152,7 @@ export class ClientsComponent implements OnDestroy, OnInit {
 
     this.breadcrumb = {
       items: [
-        { label: this.literals['clients'], link: '/clients' }
+        { label: this.literals['customers'], link: '/customers' }
       ]
     };
 

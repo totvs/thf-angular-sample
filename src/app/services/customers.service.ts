@@ -6,12 +6,12 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
-import { Customer } from './../../shared/customer';
+import { Customer } from '../shared/customer';
 
 @Injectable()
-export class ClientsService {
+export class CustomersService {
 
-  private apiUrl = 'http://localhost:3000/clients';
+  private apiUrl = 'http://localhost:3000/customers';
 
   constructor(private http: HttpClient) { }
 

@@ -4,7 +4,7 @@ export const generalPt = {
   add: 'Adicionar',
   addNewClient: 'Adicionar Novo Cliente',
   birthday: 'Data de Nascimento',
-  clients: 'Clientes',
+  customers: 'Clientes',
   code: 'Código',
   confirm: 'Confirmar',
   controller: 'Controlador',
