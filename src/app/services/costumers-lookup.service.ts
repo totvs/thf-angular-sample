@@ -12,7 +12,9 @@ export class CustomersLookupService implements ThfLookupFilter {
   constructor(private http: HttpClient) { }
 
   getFilteredData(filter: string, page: number, pageSize: number): Observable<any> {
-    return this.http.get(this.apiUrl, { params: { page: page.toString(), pageSize: pageSize.toString(), filter } });
+    let result = this.http.get(this.apiUrl, { params: { page: page.toString(), pageSize: pageSize.toString(), filter } });
+    console.log(result);
+    return result;
   }
 
   getObjectByValue(value: string): Observable<any> {

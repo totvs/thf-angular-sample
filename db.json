@@ -1,113 +1,107 @@
 {
-   "customers":{
-      "items":[
-         {
-            "id":1,
-            "codigo":"01",
-            "name":"Han Solo",
-            "email":"han@totvs.com.br",
-            "phone":"+55 430 123 234",
-            "status":"rebel",
-            "nationality":"deathstar"
-         },
-         {
-            "id":2,
-            "codigo":"02",
-            "name":"Leia Organa",
-            "email":"leia@totvs.com.br",
-            "phone":"+55 353 535 677",
-            "status":"rebel"
-         },
-         {
-            "id":3,
-            "codigo":"03",
-            "name":"Rey Kenobi",
-            "email":"rey@totvs.com.br",
-            "phone":"+55 129 039 391",
-            "status":"galactic"
-         },
-         {
-            "id":4,
-            "codigo":"04",
-            "name":"Obi-Wan Kenobi",
-            "email":"kenobi@totvs.com.br",
-            "phone":"+55 094 585 060",
-            "status":"tatooine"
-         },
-         {
-            "id":5,
-            "codigo":"05",
-            "name":"Luke Skywalker",
-            "email":"luke@totvs.com.br",
-            "phone":"+55 123 154 837",
-            "status":"galactic"
-         }
-      ],
-      "hasNext":false
-   },
-   "heroes":{
-      "items":[
-         {
-            "label":"Robert Bruce Banner",
-            "value":1495831666871,
-            "nickname":"Hulk",
-            "email":"hulksmash@marvel.com"
-         },
-         {
-            "label":"Peter Parker",
-            "value":1495831698598,
-            "nickname":"Homem Aranha",
-            "email":"spiderman@marvel.com"
-         },
-         {
-            "label":"Tony Stark",
-            "value":1495832596999,
-            "nickname":"Homem de Ferro",
-            "email":"ironman@marvel.com"
-         },
-         {
-            "label":"Kakaroto",
-            "value":1495832652942,
-            "nickname":"Goku",
-            "email":"goku@dbz.com"
-         },
-         {
-            "label":"Gohan",
-            "value":1495832683682,
-            "nickname":"Son Gohan",
-            "email":"gohan@dbz.com"
-         },
-         {
-            "label":"Steve Rogers",
-            "value":1495833068594,
-            "nickname":"Capitao America",
-            "email":"captain@marvel.com"
-         },
-         {
-            "label":"Natasha Romanova",
-            "value":1495833068595,
-            "nickname":"Viuva Negra",
-            "email":"natasha@marvel.com"
-         },
-         {
-            "label":"Nicholas Joseph Fury",
-            "value":1495833068596,
-            "nickname":"Nick Fury",
-            "email":"nickfuckingfury@marvel.com"
-         },
-         {
-            "label":"Clint Barton",
-            "value":1495833068597,
-            "nickname":"Gaviao Arqueiro",
-            "email":"hawkeye@marvel.com"
-         },
-         {
-            "label":"Thor",
-            "value":1495833068598,
-            "nickname":"Thor asdasd",
-            "email":"thor@marvel.com"
-         }
-      ],
-      "hasNext":false
-   }
+  "customers": [
+    {
+      "id": 1,
+      "codigo": "01",
+      "name": "Han Solo",
+      "email": "han@totvs.com.br",
+      "phone": "+55 430 123 234",
+      "status": "rebel",
+      "nationality": "deathstar"
+    },
+    {
+      "id": 2,
+      "codigo": "02",
+      "name": "Leia Organa",
+      "email": "leia@totvs.com.br",
+      "phone": "+55 353 535 677",
+      "status": "rebel"
+    },
+    {
+      "id": 3,
+      "codigo": "03",
+      "name": "Rey Kenobi",
+      "email": "rey@totvs.com.br",
+      "phone": "+55 129 039 391",
+      "status": "galactic"
+    },
+    {
+      "id": 4,
+      "codigo": "04",
+      "name": "Obi-Wan Kenobi",
+      "email": "kenobi@totvs.com.br",
+      "phone": "+55 094 585 060",
+      "status": "tatooine"
+    },
+    {
+      "id": 5,
+      "codigo": "05",
+      "name": "Luke Skywalker",
+      "email": "luke@totvs.com.br",
+      "phone": "+55 123 154 837",
+      "status": "galactic"
+    }
+  ],
+  "heroes": [
+    {
+      "label": "Robert Bruce Banner",
+      "value": 1495831666871,
+      "nickname": "Hulk",
+      "email": "hulksmash@marvel.com"
+    },
+    {
+      "label": "Peter Parker",
+      "value": 1495831698598,
+      "nickname": "Homem Aranha",
+      "email": "spiderman@marvel.com"
+    },
+    {
+      "label": "Tony Stark",
+      "value": 1495832596999,
+      "nickname": "Homem de Ferro",
+      "email": "ironman@marvel.com"
+    },
+    {
+      "label": "Kakaroto",
+      "value": 1495832652942,
+      "nickname": "Goku",
+      "email": "goku@dbz.com"
+    },
+    {
+      "label": "Gohan",
+      "value": 1495832683682,
+      "nickname": "Son Gohan",
+      "email": "gohan@dbz.com"
+    },
+    {
+      "label": "Steve Rogers",
+      "value": 1495833068594,
+      "nickname": "Capitao America",
+      "email": "captain@marvel.com"
+    },
+    {
+      "label": "Natasha Romanova",
+      "value": 1495833068595,
+      "nickname": "Viuva Negra",
+      "email": "natasha@marvel.com"
+    },
+    {
+      "label": "Nicholas Joseph Fury",
+      "value": 1495833068596,
+      "nickname": "Nick Fury",
+      "email": "nickfuckingfury@marvel.com"
+    },
+    {
+      "label": "Clint Barton",
+      "value": 1495833068597,
+      "nickname": "Gaviao Arqueiro",
+      "email": "hawkeye@marvel.com"
+    },
+    {
+      "label": "Thor",
+      "value": 1495833068598,
+      "nickname": "Thor asdasd",
+      "email": "thor@marvel.com"
+    }
+  ]
 }
