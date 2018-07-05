@@ -15,26 +15,26 @@ export class CustomersService {
 
   constructor(private http: HttpClient) { }
 
-  getClients() {
+  getCustomers() {
     return this.http.get(this.apiUrl);
   }
 
-  getClient(id: string): Observable<Customer> {
+  getCustomer(id: string): Observable<Customer> {
 
     return this.http.get(`${this.apiUrl}/${id}`).map(response => {
       return new Customer(response);
     });
   }
 
-  addClient(customer: Customer) {
+  addCustomer(customer: Customer) {
     return this.http.post(this.apiUrl, customer);
   }
 
-  deleteClient(id: string) {
+  deleteCustomer(id: string) {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
-  updateClient(customer) {
+  updateCustomer(customer) {
     const url = `${this.apiUrl}/${customer.id}`;
 
     return this.http.put(url, customer);

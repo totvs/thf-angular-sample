@@ -74,30 +74,30 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
       this.setLiteralsDefaultValues();
     });
 
-    this.getClient();
+    this.getCustomer();
   }
 
-  private addClient(customer: Customer) {
-    this.customersService.addClient(customer).subscribe(() => {
+  private addCustomer(customer: Customer) {
+    this.customersService.addCustomer(customer).subscribe(() => {
       this.router.navigate(['/customers']);
       this.thfNotification.success('Cliente cadastrado com sucesso.');
     });
   }
 
-  private deleteClient() {
-    this.customersService.deleteClient(this.customer.id).subscribe(data => {
+  private deleteCustomer() {
+    this.customersService.deleteCustomer(this.customer.id).subscribe(data => {
       this.router.navigate(['/customers']);
       this.thfNotification.success('O cliente foi excluído.');
     });
   }
 
-  private getClient() {
+  private getCustomer() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
 
     if (id) {
       this.isPageEdit = true;
 
-      this.customersService.getClient(id).subscribe((customer: Customer) => {
+      this.customersService.getCustomer(id).subscribe((customer: Customer) => {
         this.customer = customer;
       });
     }
@@ -106,7 +106,7 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
   private onConfirmDelete() {
     this.confirmDelete = true;
     this.modalDeleteUser.close();
-    this.deleteClient();
+    this.deleteCustomer();
   }
 
   private setLiteralsDefaultValues() {
@@ -133,7 +133,7 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
     };
 
     this.editUserActions = [
-      { label: this.literals['saveClient'], action: this.updateClient.bind(this, this.customer), icon: 'thf-icon-plus' },
+      { label: this.literals['saveClient'], action: this.updateCustomer.bind(this, this.customer), icon: 'thf-icon-plus' },
       { label: this.literals['return'], action: () => this.location.back() },
       { label: this.literals['print'], action: () => alert('Imprimir') },
       { label: this.literals['remove'], action: () => this.modalDeleteUser.open() },
@@ -149,13 +149,13 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
     ];
 
     this.newUserActions = [
-      { label: this.literals['saveClient'], action: this.addClient.bind(this, this.customer), icon: 'thf-icon-plus' },
+      { label: this.literals['saveClient'], action: this.addCustomer.bind(this, this.customer), icon: 'thf-icon-plus' },
       { label: this.literals['return'], action: () => this.location.back() }
     ];
   }
 
-  private updateClient() {
-    this.customersService.updateClient(this.customer).subscribe(() => {
+  private updateCustomer() {
+    this.customersService.updateCustomer(this.customer).subscribe(() => {
       this.router.navigate(['/customers']);
       this.thfNotification.success('Alteração efetuada com sucesso.');
     });

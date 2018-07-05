@@ -58,7 +58,7 @@ export class CustomersComponent implements OnDestroy, OnInit {
       this.setLiteralsDefaultValues();
     });
 
-    this.getClients();
+    this.getCustomers();
 
     this.disclaimerGroup = {
       title: 'Filters',
@@ -93,8 +93,8 @@ export class CustomersComponent implements OnDestroy, OnInit {
     }
   }
 
-  private getClients() {
-    this.customersSubscription = this.customersService.getClients().subscribe((customers: Array<Customer>) => {
+  private getCustomers() {
+    this.customersSubscription = this.customersService.getCustomers().subscribe((customers: Array<Customer>) => {
       this.items = customers;
       this.itemsFiltered = [...this.items];
 
