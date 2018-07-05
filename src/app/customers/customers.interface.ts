@@ -1,6 +1,6 @@
-export interface TotvsResponse {
+export interface TotvsResponse<T> {
 
-  items: Array<any>;
+  items: Array<T>;
   hasNext?: boolean;
 
 }

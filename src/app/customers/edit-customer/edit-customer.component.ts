@@ -1,3 +1,4 @@
+import { TotvsResponse } from './../customers.interface';
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -102,10 +103,8 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
 
   private getCustomer() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
-
     if (id) {
       this.isPageEdit = true;
-
       this.customersService.getCustomer(id).subscribe((customer: Customer) => {
         this.customer = customer;
       });

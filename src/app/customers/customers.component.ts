@@ -95,7 +95,7 @@ export class CustomersComponent implements OnDestroy, OnInit {
   }
 
   private getCustomers() {
-    this.customersSubscription = this.customersService.getCustomers().subscribe((customers: TotvsResponse) => {
+    this.customersSubscription = this.customersService.getCustomers().subscribe((customers: TotvsResponse<Customer>) => {
       this.items = customers.items;
       this.itemsFiltered = [...this.items];
 

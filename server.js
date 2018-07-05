@@ -5,10 +5,9 @@ const middlewares = jsonServer.defaults()
 
 router.render = (req, res) => {
 
-  console.log(req);
   res.jsonp({
     hasNext: false,
-    items: res.locals.data
+    items: res.locals.data.length > 1 ? res.locals.data : [res.locals.data]
   })
 }
 
