@@ -15,6 +15,7 @@ export const generalPt = {
   export: 'Exportar',
   idealist: 'Idealista',
   influency: 'Influência',
+  insertValue: 'Insira o Valor',
   inventor: 'Inventor',
   modalDeleteMessage: 'Tem certeza de que deseja excluir o cliente {0} da lista de clientes?',
   modalDeleteTitle: 'Deseja excluir este cadastro?',

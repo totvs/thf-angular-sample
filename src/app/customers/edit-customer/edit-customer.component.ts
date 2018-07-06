@@ -1,4 +1,3 @@
-import { TotvsResponse } from './../customers.interface';
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';

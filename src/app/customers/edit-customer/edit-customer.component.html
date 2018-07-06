@@ -81,10 +81,11 @@
             class="thf-md-6"
             name="lookup"
             [(ngModel)]="customer.lookup"
-            t-field-label="label"
-            t-field-value="label"
+            t-field-label="nickname"
+            t-field-value="nickname"
             t-help="Select hero for mission"
             t-label="Hero"
+            [t-placeholder]="literals?.insertValue"
             t-required
             t-title="Heroes available for mission"
             [t-columns]="columns"

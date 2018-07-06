@@ -15,6 +15,7 @@ export const generalEn = {
   export: 'Export',
   idealist: 'Idealista',
   influency: 'Influency',
+  insertValue: 'Insert Value',
   inventor: 'Inventor',
   modalDeleteMessage: 'Are you sure you want to delete client {0} from the client list?',
   modalDeleteTitle: 'Do you want to delete this registration?',
