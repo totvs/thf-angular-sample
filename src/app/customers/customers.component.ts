@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
@@ -6,9 +6,11 @@ import { Subscription } from 'rxjs/Subscription';
 import { ThfBreadcrumb } from '@totvs/thf-ui/components/thf-breadcrumb/thf-breadcrumb.interface';
 import { ThfDisclaimer } from '@totvs/thf-ui/components/thf-disclaimer/thf-disclaimer.interface';
 import { ThfDisclaimerGroup } from '@totvs/thf-ui/components/thf-disclaimer-group';
+import { ThfI18nService } from '@totvs/thf-ui/services/thf-i18n/thf-i18n.service';
+import { ThfModalAction } from '@totvs/thf-ui/components/thf-modal';
+import { ThfModalComponent } from '@totvs/thf-ui/components/thf-modal/thf-modal.component';
 import { ThfPageAction, ThfPageFilter } from '@totvs/thf-ui/components/thf-page';
 import { ThfTableColumn } from '@totvs/thf-ui/components/thf-table';
-import { ThfI18nService } from '@totvs/thf-ui/services/thf-i18n/thf-i18n.service';
 
 import { CustomersService } from '../services/customers.service';
 import { Customer } from './../shared/customer';
@@ -20,6 +22,9 @@ import { TotvsResponse } from './customers.interface';
   styleUrls: ['./customers.component.css']
 })
 export class CustomersComponent implements OnDestroy, OnInit {
+
+  cancelDeleteAction: ThfModalAction;
+  confirmDeleteAction: ThfModalAction;
 
   pageActions: Array<ThfPageAction>;
   tableActions: Array<ThfPageAction>;
@@ -40,6 +45,8 @@ export class CustomersComponent implements OnDestroy, OnInit {
 
   private customersSubscription: Subscription;
   private literalsSubscription: Subscription;
+
+  @ViewChild('modalDeleteUser') modalDeleteUser: ThfModalComponent;
 
   constructor(
     private customersService: CustomersService,
@@ -107,6 +114,11 @@ export class CustomersComponent implements OnDestroy, OnInit {
     return filters.some(filter => String(item).toLocaleLowerCase().includes(filter.toLocaleLowerCase()));
   }
 
+  onConfirmDelete() {
+    const selectedItems = this.itemsFiltered.filter((item: any) => item.$selected);
+    console.log(selectedItems);
+  }
+
   private onChangeDisclaimer(disclaimers) {
     this.disclaimers = disclaimers;
     this.filter();
@@ -128,10 +140,20 @@ export class CustomersComponent implements OnDestroy, OnInit {
   }
 
   private setLiteralsDefaultValues() {
+
+    this.confirmDeleteAction = {
+      action: () => this.onConfirmDelete(), label: this.literals['remove']
+    };
+
+    this.cancelDeleteAction = {
+      action: () => this.modalDeleteUser.close(), label: this.literals['return']
+    };
+
     this.pageActions = [
       { label: this.literals['addNewClient'], action: () => this.router.navigate(['/new-customer']), icon: 'thf-icon-plus' },
       { label: this.literals['print'], action: () => alert('Ação Imprimir')},
       { label: this.literals['export'], action: () => alert('Exportando')},
+      { label: this.literals['remove'], action: () => this.modalDeleteUser.open()},
       { label: this.literals['actions'], action: () => alert('Ação 2') }
     ];
 

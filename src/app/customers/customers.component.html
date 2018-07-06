@@ -7,9 +7,21 @@
   [t-filter]="filterSettings">
 
   <thf-table
+    t-checkbox="true"
+    t-hide-select-all="false"
     [t-loading]="isLoading"
     [t-actions]="tableActions"
     [t-columns]="columns"
     [t-items]="itemsFiltered">
   </thf-table>
 </thf-page-list>
+
+<thf-modal #modalDeleteUser
+  t-close
+  t-size="sm"
+  [t-title]="literals?.modalDeleteTitle"
+  [t-primary-action]="confirmDeleteAction"
+  [t-secondary-action]="cancelDeleteAction">
+
+  <div class="thf-font-text-large thf-text-left">{{ literals?.modalDeleteMessage }}</div>
+</thf-modal>
