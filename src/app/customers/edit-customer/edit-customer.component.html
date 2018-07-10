@@ -102,7 +102,18 @@
   t-size="sm"
   [t-title]="literals?.modalDeleteTitle"
   [t-primary-action]="confirmDeleteAction"
-  [t-secondary-action]="cancelDeleteAction">
+  [t-secondary-action]="returnAction">
 
   <div class="thf-font-text-large thf-text-left">{{ literals?.modalDeleteMessage | thfI18n:[customer.name] }}</div>
 </thf-modal>
+
+<thf-modal #modalCancelEditUser
+  t-close
+  t-size="sm"
+  [t-title]="literals?.modalCancelEditUserTitle"
+  [t-primary-action]="confirmReturnToListAction"
+  [t-secondary-action]="returnAction2">
+
+  <div class="thf-font-text-large thf-text-left">{{ literals?.modalCancelEditUserMessage | thfI18n:[customer.name] }}</div>
+</thf-modal>
+

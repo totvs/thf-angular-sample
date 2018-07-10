@@ -23,5 +23,5 @@
   [t-primary-action]="confirmDeleteAction"
   [t-secondary-action]="cancelDeleteAction">
 
-  <div class="thf-font-text-large thf-text-left">{{ literals?.modalDeleteMessage }}</div>
+  <div class="thf-font-text-large thf-text-left">{{ literals?.modalDeleteMessage | thfI18n:[''] }}</div>
 </thf-modal>

@@ -9,6 +9,7 @@ import { ThfDisclaimerGroup } from '@totvs/thf-ui/components/thf-disclaimer-grou
 import { ThfI18nService } from '@totvs/thf-ui/services/thf-i18n/thf-i18n.service';
 import { ThfModalAction } from '@totvs/thf-ui/components/thf-modal';
 import { ThfModalComponent } from '@totvs/thf-ui/components/thf-modal/thf-modal.component';
+import { ThfNotificationService } from '@totvs/thf-ui/services/thf-notification/thf-notification.service';
 import { ThfPageAction, ThfPageFilter } from '@totvs/thf-ui/components/thf-page';
 import { ThfTableColumn } from '@totvs/thf-ui/components/thf-table';
 
@@ -51,7 +52,8 @@ export class CustomersComponent implements OnDestroy, OnInit {
   constructor(
     private customersService: CustomersService,
     private router: Router,
-    private thfI18nService: ThfI18nService
+    private thfI18nService: ThfI18nService,
+    public thfNotification: ThfNotificationService,
   ) { }
 
   ngOnDestroy(): void {
@@ -114,9 +116,22 @@ export class CustomersComponent implements OnDestroy, OnInit {
     return filters.some(filter => String(item).toLocaleLowerCase().includes(filter.toLocaleLowerCase()));
   }
 
-  onConfirmDelete() {
-    const selectedItems = this.itemsFiltered.filter((item: any) => item.$selected);
-    console.log(selectedItems);
+  private onConfirmDelete() {
+    this.modalDeleteUser.close();
+    this.deleteCustomer();
+  }
+
+  private deleteCustomer() {
+    const selectedCustomers = this.itemsFiltered.filter((customer: any) => customer.$selected);
+
+    if (selectedCustomers.length > 0) {
+      selectedCustomers.map(((customer: Customer) => {
+        this.customersService.deleteCustomer(customer.id).subscribe(data => {
+          this.getCustomers();
+        });
+      }));
+      this.thfNotification.success(this.literals['excludedCustomer']);
+    }
   }
 
   private onChangeDisclaimer(disclaimers) {
@@ -185,5 +200,4 @@ export class CustomersComponent implements OnDestroy, OnInit {
       placeholder: this.literals['search']
     };
   }
-
 }

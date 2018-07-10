@@ -22,7 +22,7 @@ export class CustomersService {
 
   getCustomer(id: string): Observable<Customer> {
     return this.http.get(`${this.apiUrl}/${id}`).map((response: TotvsResponse<Customer>) => {
-      return response.items[0];
+      return response.items;
     });
   }
 

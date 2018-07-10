@@ -7,6 +7,7 @@ router.render = (req, res) => {
 
   res.jsonp({
     hasNext: false,
+    // items: res.locals.data
     items: res.locals.data.length > 1 ? res.locals.data : [res.locals.data]
   })
 }

@@ -16,7 +16,9 @@ export class CustomersLookupService implements ThfLookupFilter {
   }
 
   getObjectByValue(value: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}?label=${value}`);
+    return this.http.get(`${this.apiUrl}?nickname=${value}`).map((response: any) => {
+      return response.items[0][0];
+    });
   }
 
 }

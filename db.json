@@ -40,6 +40,55 @@
       "email": "luke@totvs.com.br",
       "phone": "+55 123 154 837",
       "status": "galactic"
+    },
+    {
+      "name": "nelson",
+      "email": "123samir@gmail.com",
+      "phone": "11981221730",
+      "birthday": "2018-07-11T14:50:33-03:00",
+      "nationality": "coruscant",
+      "status": "rebel",
+      "personality": [
+        "Crafter",
+        "Protetor",
+        "Performer"
+      ],
+      "lookup": "Homem Aranha",
+      "id": 7
+    },
+    {
+      "name": "Samir Ayoub",
+      "email": "123samir@gmail.com",
+      "phone": "11981221730",
+      "birthday": "2018-07-06T14:52:37-03:00",
+      "nationality": "coruscant",
+      "personality": [
+        "Protetor",
+        "Performer"
+      ],
+      "lookup": "Homem de Ferro",
+      "id": 8
+    },
+    {
+      "name": "Jhony",
+      "birthday": "2018-07-11T16:36:25-03:00",
+      "email": "123samir@gmail.com",
+      "phone": "11981221730",
+      "personality": [
+        "Protetor",
+        "Crafter"
+      ],
+      "nationality": "coruscant",
+      "status": "tatooine",
+      "lookup": "Hulk",
+      "id": 9
+    },
+    {
+      "name": "Samir Ayoub",
+      "email": "123samir@gmail.com",
+      "phone": "11981221730",
+      "lookup": "Thor asdasd",
+      "id": 10
     }
   ],
   "heroes": [
@@ -90,6 +139,30 @@
       "value": 1495833068596,
       "nickname": "Nick Fury",
       "email": "nickfuckingfury@marvel.com"
+    },
+    {
+      "label": "Clint Barton",
+      "value": 1495833068597,
+      "nickname": "Gaviao Arqueiro",
+      "email": "hawkeye@marvel.com"
+    },
+    {
+      "label": "Thor",
+      "value": 1495833068598,
+      "nickname": "Thor asdasd",
+      "email": "thor@marvel.com"
+    },
+    {
+      "label": "Clint Barton",
+      "value": 1495833068597,
+      "nickname": "Gaviao Arqueiro",
+      "email": "hawkeye@marvel.com"
+    },
+    {
+      "label": "Samir",
+      "value": 1495833068598,
+      "nickname": "Thor asdasd",
+      "email": "thor@marvel.com"
     },
     {
       "label": "Clint Barton",

@@ -23,8 +23,10 @@ import { CustomersService } from '../../services/customers.service';
 })
 export class EditCustomerComponent implements OnInit, OnDestroy {
 
-  cancelDeleteAction: ThfModalAction;
   confirmDeleteAction: ThfModalAction;
+  confirmReturnToListAction: ThfModalAction;
+  returnAction: ThfModalAction;
+  returnAction2: ThfModalAction;
 
   editUserBreadcrumb: ThfBreadcrumb;
   newUserBreadcrumb: ThfBreadcrumb;
@@ -32,7 +34,6 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
   editUserActions: Array<ThfPageAction>;
   newUserActions: Array<ThfPageAction>;
 
-  confirmDelete = false;
   customer: Customer = new Customer();
   literals = {};
   isPageEdit: boolean;
@@ -61,6 +62,7 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
   private literalsSubscription: Subscription;
 
   @ViewChild('modalDeleteUser') modalDeleteUser: ThfModalComponent;
+  @ViewChild('modalCancelEditUser') modalCancelEditUser: ThfModalComponent;
 
   constructor(
     private customersService: CustomersService,
@@ -96,7 +98,7 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
   private deleteCustomer() {
     this.customersService.deleteCustomer(this.customer.id).subscribe(data => {
       this.router.navigate(['/customers']);
-      this.thfNotification.success('O cliente foi excluído.');
+      this.thfNotification.success(this.literals['excludedCustomer']);
     });
   }
 
@@ -105,13 +107,12 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
     if (id) {
       this.isPageEdit = true;
       this.customersService.getCustomer(id).subscribe((customer: Customer) => {
-        this.customer = customer;
+        this.customer = customer[0];
       });
     }
   }
 
   private onConfirmDelete() {
-    this.confirmDelete = true;
     this.modalDeleteUser.close();
     this.deleteCustomer();
   }
@@ -121,8 +122,16 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
       action: () => this.onConfirmDelete(), label: this.literals['remove']
     };
 
-    this.cancelDeleteAction = {
+    this.returnAction = {
       action: () => this.modalDeleteUser.close(), label: this.literals['return']
+    };
+
+    this.returnAction2 = {
+      action: () => this.modalCancelEditUser.close(), label: this.literals['return']
+    };
+
+    this.confirmReturnToListAction = {
+      label: this.literals['cancel'], action: () => this.location.back()
     };
 
     this.editUserBreadcrumb = {
@@ -141,7 +150,7 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
 
     this.editUserActions = [
       { label: this.literals['saveClient'], action: this.updateCustomer.bind(this, this.customer), icon: 'thf-icon-plus' },
-      { label: this.literals['return'], action: () => this.location.back() },
+      { label: this.literals['return'], action: () => this.modalCancelEditUser.open() },
       { label: this.literals['print'], action: () => alert('Imprimir') },
       { label: this.literals['remove'], action: () => this.modalDeleteUser.open() },
     ];
