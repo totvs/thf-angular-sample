@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { Location } from '@angular/common';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
+import { NgForm } from '@angular/forms';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -26,7 +27,6 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
   confirmDeleteAction: ThfModalAction;
   confirmReturnToListAction: ThfModalAction;
   returnAction: ThfModalAction;
-  returnAction2: ThfModalAction;
 
   editUserBreadcrumb: ThfBreadcrumb;
   newUserBreadcrumb: ThfBreadcrumb;
@@ -63,6 +63,7 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
 
   @ViewChild('modalDeleteUser') modalDeleteUser: ThfModalComponent;
   @ViewChild('modalCancelEditUser') modalCancelEditUser: ThfModalComponent;
+  @ViewChild('formUser') formUser: NgForm;
 
   constructor(
     private customersService: CustomersService,
@@ -95,6 +96,11 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
     });
   }
 
+  private closeModal() {
+    this.modalDeleteUser.close();
+    this.modalCancelEditUser.close();
+  }
+
   private deleteCustomer() {
     this.customersService.deleteCustomer(this.customer.id).subscribe(data => {
       this.router.navigate(['/customers']);
@@ -117,22 +123,25 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
     this.deleteCustomer();
   }
 
+  private checkUserInteractionOnForm(formUser: NgForm) {
+    formUser.dirty === true ? this.modalCancelEditUser.open() : this.location.back();
+  }
+
   private setLiteralsDefaultValues() {
     this.confirmDeleteAction = {
       action: () => this.onConfirmDelete(), label: this.literals['remove']
     };
 
-    this.returnAction = {
-      action: () => this.modalDeleteUser.close(), label: this.literals['return']
-    };
-
-    this.returnAction2 = {
-      action: () => this.modalCancelEditUser.close(), label: this.literals['return']
-    };
-
     this.confirmReturnToListAction = {
-      label: this.literals['cancel'], action: () => this.location.back()
+      label: this.literals['yes'], action: () => this.location.back()
     };
+
+    this.editUserActions = [
+      { label: this.literals['saveClient'], action: this.updateCustomer.bind(this, this.customer), icon: 'thf-icon-plus' },
+      { label: this.literals['return'], action: this.checkUserInteractionOnForm.bind(this, this.formUser) },
+      { label: this.literals['print'], action: () => alert('Imprimir') },
+      { label: this.literals['remove'], action: () => this.modalDeleteUser.open() },
+    ];
 
     this.editUserBreadcrumb = {
       items: [
@@ -141,19 +150,17 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
       ]
     };
 
+    this.newUserActions = [
+      { label: this.literals['saveClient'], action: this.addCustomer.bind(this, this.customer), icon: 'thf-icon-plus' },
+      { label: this.literals['return'], action: this.checkUserInteractionOnForm.bind(this, this.formUser) }
+    ];
+
     this.newUserBreadcrumb = {
       items: [
         { label: this.literals['customers'], link: '/customers' },
         { label: this.literals['addNewClient'], link: '/customers/new-customer' }
       ]
     };
-
-    this.editUserActions = [
-      { label: this.literals['saveClient'], action: this.updateCustomer.bind(this, this.customer), icon: 'thf-icon-plus' },
-      { label: this.literals['return'], action: () => this.modalCancelEditUser.open() },
-      { label: this.literals['print'], action: () => alert('Imprimir') },
-      { label: this.literals['remove'], action: () => this.modalDeleteUser.open() },
-    ];
 
     this.personalityOptions = [
       { value: 'Crafter', label: this.literals['crafter'] },
@@ -164,10 +171,9 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
       { value: 'Idealista', label: this.literals['idealist'] }
     ];
 
-    this.newUserActions = [
-      { label: this.literals['saveClient'], action: this.addCustomer.bind(this, this.customer), icon: 'thf-icon-plus' },
-      { label: this.literals['return'], action: () => this.location.back() }
-    ];
+    this.returnAction = {
+      action: this.closeModal.bind(this), label: this.literals['return']
+    };
   }
 
   private updateCustomer() {

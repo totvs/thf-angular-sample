@@ -34,4 +34,5 @@ export const generalPt = {
   return: 'Voltar',
   saveClient: 'Salvar Cliente',
   search: 'Buscar',
+  yes: 'Sim'
  };

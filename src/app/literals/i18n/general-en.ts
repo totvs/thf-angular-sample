@@ -34,4 +34,5 @@ export const generalEn = {
   return: 'Back',
   saveClient: 'Save Client',
   search: 'Search',
+  yes: 'Yes'
  };
