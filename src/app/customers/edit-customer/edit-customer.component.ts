@@ -96,6 +96,10 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
     });
   }
 
+  private checkUserInteractionOnForm(formUser: NgForm) {
+    formUser.dirty === true ? this.modalCancelEditUser.open() : this.location.back();
+  }
+
   private closeModal() {
     this.modalDeleteUser.close();
     this.modalCancelEditUser.close();
@@ -121,10 +125,6 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
   private onConfirmDelete() {
     this.modalDeleteUser.close();
     this.deleteCustomer();
-  }
-
-  private checkUserInteractionOnForm(formUser: NgForm) {
-    formUser.dirty === true ? this.modalCancelEditUser.open() : this.location.back();
   }
 
   private setLiteralsDefaultValues() {

@@ -89,6 +89,19 @@ export class CustomersComponent implements OnDestroy, OnInit {
     });
   }
 
+  private deleteCustomer() {
+    const selectedCustomers = this.itemsFiltered.filter((customer: any) => customer.$selected);
+
+    if (selectedCustomers.length > 0) {
+      selectedCustomers.map(((customer: Customer) => {
+        this.customersService.deleteCustomer(customer.id).subscribe(data => {
+          this.getCustomers();
+        });
+      }));
+      this.thfNotification.success(this.literals['excludedCustomer']);
+    }
+  }
+
   private editCustomer(customer: Customer) {
     this.router.navigate(['/edit', customer.id]);
   }
@@ -119,19 +132,6 @@ export class CustomersComponent implements OnDestroy, OnInit {
   private onConfirmDelete() {
     this.modalDeleteUser.close();
     this.deleteCustomer();
-  }
-
-  private deleteCustomer() {
-    const selectedCustomers = this.itemsFiltered.filter((customer: any) => customer.$selected);
-
-    if (selectedCustomers.length > 0) {
-      selectedCustomers.map(((customer: Customer) => {
-        this.customersService.deleteCustomer(customer.id).subscribe(data => {
-          this.getCustomers();
-        });
-      }));
-      this.thfNotification.success(this.literals['excludedCustomer']);
-    }
   }
 
   private onChangeDisclaimer(disclaimers) {
