@@ -42,9 +42,9 @@ export class CustomersComponent implements OnDestroy, OnInit {
   itemsFiltered: Array<Customer>;
   statusOptions: Array<ThfSelectOption>;
 
-  customerStatus;
+  customerStatus: string;
   isLoading: boolean = true;
-  labelFilter: Array<string> = [];
+  labelFilter: string = '';
   literals = {};
 
   private disclaimers: Array<ThfDisclaimer> = [];
@@ -90,15 +90,13 @@ export class CustomersComponent implements OnDestroy, OnInit {
     this.advancedFilterModal.open();
   }
 
-  filterAction() {
-    console.log([this.labelFilter]);
-    this.populateDisclaimers([this.labelFilter]);
+  filterAction(filter = [this.labelFilter]) {
+
+    this.populateDisclaimers(filter);
     this.filter();
   }
 
-  private applyFilters() {
-    const filters = this.disclaimers.map(disclaimer => disclaimer.value);
-
+  private applyFilters(filters) {
     this.itemsFiltered = this.items.filter(item => {
       return Object.keys(item)
       .some(key => (!(item[key] instanceof Object) && this.includeFilter(item[key], filters)));
@@ -123,12 +121,9 @@ export class CustomersComponent implements OnDestroy, OnInit {
   }
 
   private filter() {
-    if (this.itemsFiltered) {
-      this.applyFilters();
-      if (this.labelFilter === [] || !this.disclaimers.length) {
-        this.resetFilterHiringProcess();
-      }
-    }
+    const filters = this.disclaimers.map(disclaimer => disclaimer.value);
+
+    filters.length ? this.applyFilters(filters) : this.resetFilters();
   }
 
   private getCustomers() {
@@ -154,8 +149,7 @@ export class CustomersComponent implements OnDestroy, OnInit {
     this.filter();
   }
 
-  private populateDisclaimers(filters: Array<any>) {
-    // console.log(filters);
+  private populateDisclaimers(filters) {
     this.disclaimers = filters.map(value => ({ value }));
 
     if (this.disclaimers && this.disclaimers.length > 0) {
@@ -165,9 +159,9 @@ export class CustomersComponent implements OnDestroy, OnInit {
     }
   }
 
-  private resetFilterHiringProcess() {
+  private resetFilters() {
     this.itemsFiltered = [...this.items];
-    this.labelFilter = [];
+    this.customerStatus = '';
   }
 
   private setLiteralsDefaultValues() {
@@ -175,10 +169,8 @@ export class CustomersComponent implements OnDestroy, OnInit {
     this.advancedFilterPrimaryAction = {
       action: () => {
         this.advancedFilterModal.close();
-        // const filters: Array<string> = [...this.customerStatus];
-        this.labelFilter = [...this.customerStatus];
-        // console.log(this.labelFilter);
-        this.filterAction();
+        const filters = [this.customerStatus];
+        this.filterAction(filters);
       },
       label: 'Apply filters'
     };
