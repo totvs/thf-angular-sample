@@ -7,7 +7,8 @@ import { RouterModule } from '@angular/router';
 import { ThfModule } from '@totvs/thf-ui';
 
 import { CustomersComponent } from './customers.component';
-import { CustomersLookupService } from './../services/costumers-lookup.service';
+import { CustomerFormGroupService } from './customer-form-group.service';
+import { CustomersLookupService } from '../services/costumers-lookup.service';
 import { CustomersService } from '../services/customers.service';
 import { EditCustomerComponent } from './edit-customer/edit-customer.component';
 
@@ -26,6 +27,6 @@ import { EditCustomerComponent } from './edit-customer/edit-customer.component';
   exports: [
     CustomersComponent
   ],
-  providers: [CustomersLookupService, CustomersService],
+  providers: [CustomersLookupService, CustomersService, CustomerFormGroupService],
 })
 export class CustomersModule { }

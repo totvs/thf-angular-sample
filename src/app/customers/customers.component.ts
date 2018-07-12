@@ -11,10 +11,12 @@ import { ThfModalAction } from '@totvs/thf-ui/components/thf-modal';
 import { ThfModalComponent } from '@totvs/thf-ui/components/thf-modal/thf-modal.component';
 import { ThfNotificationService } from '@totvs/thf-ui/services/thf-notification/thf-notification.service';
 import { ThfPageAction, ThfPageFilter } from '@totvs/thf-ui/components/thf-page';
+import { ThfSelectOption } from '@totvs/thf-ui/components/thf-field';
 import { ThfTableColumn } from '@totvs/thf-ui/components/thf-table';
 
+import { CustomerFormGroupService } from './customer-form-group.service';
 import { CustomersService } from '../services/customers.service';
-import { Customer } from './../shared/customer';
+import { Customer } from '../shared/customer';
 import { TotvsResponse } from './customers.interface';
 
 @Component({
@@ -24,6 +26,7 @@ import { TotvsResponse } from './customers.interface';
 })
 export class CustomersComponent implements OnDestroy, OnInit {
 
+  advancedFilterPrimaryAction: ThfModalAction;
   cancelDeleteAction: ThfModalAction;
   confirmDeleteAction: ThfModalAction;
 
@@ -37,9 +40,11 @@ export class CustomersComponent implements OnDestroy, OnInit {
   columns: Array<ThfTableColumn>;
   items: Array<Customer>;
   itemsFiltered: Array<Customer>;
+  statusOptions: Array<ThfSelectOption>;
 
+  customerStatus;
   isLoading: boolean = true;
-  labelFilter = '';
+  labelFilter: Array<string> = [];
   literals = {};
 
   private disclaimers: Array<ThfDisclaimer> = [];
@@ -48,11 +53,13 @@ export class CustomersComponent implements OnDestroy, OnInit {
   private literalsSubscription: Subscription;
 
   @ViewChild('modalDeleteUser') modalDeleteUser: ThfModalComponent;
+  @ViewChild('advancedFilterModal') advancedFilterModal: ThfModalComponent;
 
   constructor(
     private customersService: CustomersService,
     private router: Router,
     private thfI18nService: ThfI18nService,
+    private customerFormGroupService: CustomerFormGroupService,
     public thfNotification: ThfNotificationService,
   ) { }
 
@@ -75,14 +82,23 @@ export class CustomersComponent implements OnDestroy, OnInit {
       disclaimers: [],
       change: this.onChangeDisclaimer.bind(this)
     };
+
+    this.statusOptions = this.customerFormGroupService.getStatusOptions();
+  }
+
+  advancedFilterActionModal() {
+    this.advancedFilterModal.open();
   }
 
   filterAction() {
+    console.log([this.labelFilter]);
     this.populateDisclaimers([this.labelFilter]);
     this.filter();
   }
 
-  private applyFilters(filters) {
+  private applyFilters() {
+    const filters = this.disclaimers.map(disclaimer => disclaimer.value);
+
     this.itemsFiltered = this.items.filter(item => {
       return Object.keys(item)
       .some(key => (!(item[key] instanceof Object) && this.includeFilter(item[key], filters)));
@@ -107,10 +123,9 @@ export class CustomersComponent implements OnDestroy, OnInit {
   }
 
   private filter() {
-    const filters = this.disclaimers.map(disclaimer => disclaimer.value);
     if (this.itemsFiltered) {
-      this.applyFilters(filters);
-      if (this.labelFilter === '' || !this.disclaimers.length) {
+      this.applyFilters();
+      if (this.labelFilter === [] || !this.disclaimers.length) {
         this.resetFilterHiringProcess();
       }
     }
@@ -140,6 +155,7 @@ export class CustomersComponent implements OnDestroy, OnInit {
   }
 
   private populateDisclaimers(filters: Array<any>) {
+    // console.log(filters);
     this.disclaimers = filters.map(value => ({ value }));
 
     if (this.disclaimers && this.disclaimers.length > 0) {
@@ -151,10 +167,21 @@ export class CustomersComponent implements OnDestroy, OnInit {
 
   private resetFilterHiringProcess() {
     this.itemsFiltered = [...this.items];
-    this.labelFilter = '';
+    this.labelFilter = [];
   }
 
   private setLiteralsDefaultValues() {
+
+    this.advancedFilterPrimaryAction = {
+      action: () => {
+        this.advancedFilterModal.close();
+        // const filters: Array<string> = [...this.customerStatus];
+        this.labelFilter = [...this.customerStatus];
+        // console.log(this.labelFilter);
+        this.filterAction();
+      },
+      label: 'Apply filters'
+    };
 
     this.confirmDeleteAction = {
       action: () => this.onConfirmDelete(), label: this.literals['remove']
@@ -197,6 +224,7 @@ export class CustomersComponent implements OnDestroy, OnInit {
 
     this.filterSettings = {
       action: 'filterAction',
+      advancedAction: 'advancedFilterActionModal',
       ngModel: 'labelFilter',
       placeholder: this.literals['search']
     };

@@ -13,7 +13,8 @@ import { ThfModalComponent } from '@totvs/thf-ui/components/thf-modal/thf-modal.
 import { ThfNotificationService } from '@totvs/thf-ui/services/thf-notification/thf-notification.service';
 import { ThfPageAction } from '@totvs/thf-ui/components/thf-page';
 
-import { Customer } from './../../shared/customer';
+import { Customer } from '../../shared/customer';
+import { CustomerFormGroupService } from './../customer-form-group.service';
 import { CustomersLookupService } from '../../services/costumers-lookup.service';
 import { CustomersService } from '../../services/customers.service';
 
@@ -38,6 +39,7 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
   literals = {};
   isPageEdit: boolean;
   personalityOptions: Array<ThfCheckboxGroupOption>;
+  statusOptions: Array<ThfSelectOption>;
 
   hero: string;
 
@@ -53,13 +55,6 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
     { label: 'Naboo', value: 'naboo' }
   ];
 
-  readonly statusOptions: Array<ThfSelectOption> = [
-    { label: 'Cloud-Riders', value: 'cloud' },
-    { label: 'Crimson Dawn', value: 'crimson' },
-    { label: 'Galactic Empire', value: 'galactic' },
-    { label: 'Pyke Syndicate', value: 'pyke' }
-  ];
-
   private literalsSubscription: Subscription;
 
   @ViewChild('modalDeleteUser') modalDeleteUser: ThfModalComponent;
@@ -68,6 +63,7 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
 
   constructor(
     private customersService: CustomersService,
+    private customerFormGroupService: CustomerFormGroupService,
     private location: Location,
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -88,6 +84,8 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
     });
 
     this.getCustomer();
+
+    this.statusOptions = this.customerFormGroupService.getStatusOptions();
   }
 
   private addCustomer(customer: Customer) {

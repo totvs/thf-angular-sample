@@ -25,3 +25,20 @@
 
   <div class="thf-font-text-large thf-text-left">{{ literals?.modalDeleteMessage | thfI18n:[''] }}</div>
 </thf-modal>
+
+<thf-modal
+  #advancedFilterModal
+  t-title="Advanced filter"
+  [t-primary-action]="advancedFilterPrimaryAction">
+
+  <form #f="ngForm">
+      <thf-select
+      class="thf-md-6"
+      name="status"
+      [(ngModel)]="customerStatus"
+      [t-label]="literals?.influency"
+      [t-options]="statusOptions">
+    </thf-select>
+  </form>
+
+</thf-modal>
