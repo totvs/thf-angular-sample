@@ -54,9 +54,10 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
   ];
 
   readonly statusOptions: Array<ThfSelectOption> = [
-    { label: 'Rebel', value: 'rebel' },
-    { label: 'Tattoine', value: 'tatooine' },
-    { label: 'Galactic', value: 'galactic' }
+    { label: 'Cloud-Riders', value: 'cloud' },
+    { label: 'Crimson Dawn', value: 'crimson' },
+    { label: 'Galactic Empire', value: 'galactic' },
+    { label: 'Pyke Syndicate', value: 'pyke' }
   ];
 
   private literalsSubscription: Subscription;

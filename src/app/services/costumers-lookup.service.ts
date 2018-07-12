@@ -7,7 +7,7 @@ import { ThfLookupFilter } from '@totvs/thf-ui/components/thf-field';
 @Injectable()
 export class CustomersLookupService implements ThfLookupFilter {
 
-  private apiUrl = 'http://localhost:3000/heroes';
+  private apiUrl = 'http://localhost:3000/spaceships';
 
   constructor(private http: HttpClient) { }
 
