@@ -7,9 +7,38 @@
   [t-filter]="filterSettings">
 
   <thf-table
+    t-checkbox="true"
+    t-hide-select-all="false"
     [t-loading]="isLoading"
     [t-actions]="tableActions"
     [t-columns]="columns"
     [t-items]="itemsFiltered">
   </thf-table>
 </thf-page-list>
+
+<thf-modal #modalDeleteUser
+  t-close
+  t-size="sm"
+  [t-title]="literals?.modalDeleteTitle"
+  [t-primary-action]="confirmDeleteAction"
+  [t-secondary-action]="cancelDeleteAction">
+
+  <div class="thf-font-text-large thf-text-left">{{ literals?.modalDeleteMessage | thfI18n:[''] }}</div>
+</thf-modal>
+
+<thf-modal
+  #advancedFilterModal
+  t-title="Advanced filter"
+  [t-primary-action]="advancedFilterPrimaryAction">
+
+  <form #f="ngForm">
+      <thf-select
+      class="thf-md-6"
+      name="status"
+      [(ngModel)]="customerStatus"
+      [t-label]="literals?.influency"
+      [t-options]="statusOptions">
+    </thf-select>
+  </form>
+
+</thf-modal>

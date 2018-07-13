@@ -1,19 +1,22 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { Location } from '@angular/common';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
+import { NgForm } from '@angular/forms';
 
 import { Subscription } from 'rxjs/Subscription';
 
 import { ThfBreadcrumb } from '@totvs/thf-ui/components/thf-breadcrumb/thf-breadcrumb.interface';
-import { ThfCheckboxGroupOption, ThfSelectOption } from '@totvs/thf-ui/components/thf-field';
+import { ThfCheckboxGroupOption, ThfLookupColumn, ThfSelectOption } from '@totvs/thf-ui/components/thf-field';
 import { ThfI18nService } from '@totvs/thf-ui/services/thf-i18n';
 import { ThfModalAction } from '@totvs/thf-ui/components/thf-modal';
 import { ThfModalComponent } from '@totvs/thf-ui/components/thf-modal/thf-modal.component';
 import { ThfNotificationService } from '@totvs/thf-ui/services/thf-notification/thf-notification.service';
 import { ThfPageAction } from '@totvs/thf-ui/components/thf-page';
 
+import { Customer } from '../../shared/customer';
+import { CustomerFormGroupService } from './../customer-form-group.service';
+import { CustomersLookupService } from '../../services/costumers-lookup.service';
 import { CustomersService } from '../../services/customers.service';
-import { Customer } from './../../shared/customer';
 
 @Component({
   selector: 'app-edit-customer',
@@ -22,8 +25,9 @@ import { Customer } from './../../shared/customer';
 })
 export class EditCustomerComponent implements OnInit, OnDestroy {
 
-  cancelDeleteAction: ThfModalAction;
   confirmDeleteAction: ThfModalAction;
+  confirmReturnToListAction: ThfModalAction;
+  returnAction: ThfModalAction;
 
   editUserBreadcrumb: ThfBreadcrumb;
   newUserBreadcrumb: ThfBreadcrumb;
@@ -31,11 +35,18 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
   editUserActions: Array<ThfPageAction>;
   newUserActions: Array<ThfPageAction>;
 
-  confirmDelete = false;
   customer: Customer = new Customer();
   literals = {};
   isPageEdit: boolean;
   personalityOptions: Array<ThfCheckboxGroupOption>;
+  statusOptions: Array<ThfSelectOption>;
+
+  hero: string;
+
+  public readonly columns: Array<ThfLookupColumn> = [
+    { column: 'nickname', label: 'Hero' },
+    { column: 'label', label: 'Name' }
+  ];
 
   readonly nationalityOptions: Array<ThfSelectOption> = [
     { label: 'Coruscant', value: 'coruscant' },
@@ -44,23 +55,21 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
     { label: 'Naboo', value: 'naboo' }
   ];
 
-  readonly statusOptions: Array<ThfSelectOption> = [
-    { label: 'Rebel', value: 'rebel' },
-    { label: 'Tattoine', value: 'tatooine' },
-    { label: 'Galactic', value: 'galactic' }
-  ];
-
   private literalsSubscription: Subscription;
 
   @ViewChild('modalDeleteUser') modalDeleteUser: ThfModalComponent;
+  @ViewChild('modalCancelEditUser') modalCancelEditUser: ThfModalComponent;
+  @ViewChild('formUser') formUser: NgForm;
 
   constructor(
     private customersService: CustomersService,
+    private customerFormGroupService: CustomerFormGroupService,
     private location: Location,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private thfI18nService: ThfI18nService,
-    public thfNotification: ThfNotificationService
+    public lookupService: CustomersLookupService,
+    public thfNotification: ThfNotificationService,
   ) { }
 
   ngOnDestroy() {
@@ -75,6 +84,8 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
     });
 
     this.getCustomer();
+
+    this.statusOptions = this.customerFormGroupService.getStatusOptions();
   }
 
   private addCustomer(customer: Customer) {
@@ -84,27 +95,33 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
     });
   }
 
+  private checkUserInteractionOnForm(formUser: NgForm) {
+    formUser.dirty === true ? this.modalCancelEditUser.open() : this.location.back();
+  }
+
+  private closeModal() {
+    this.modalDeleteUser.close();
+    this.modalCancelEditUser.close();
+  }
+
   private deleteCustomer() {
     this.customersService.deleteCustomer(this.customer.id).subscribe(data => {
       this.router.navigate(['/customers']);
-      this.thfNotification.success('O cliente foi excluído.');
+      this.thfNotification.success(this.literals['excludedCustomer']);
     });
   }
 
   private getCustomer() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
-
     if (id) {
       this.isPageEdit = true;
-
       this.customersService.getCustomer(id).subscribe((customer: Customer) => {
-        this.customer = customer;
+        this.customer = customer[0];
       });
     }
   }
 
   private onConfirmDelete() {
-    this.confirmDelete = true;
     this.modalDeleteUser.close();
     this.deleteCustomer();
   }
@@ -114,9 +131,16 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
       action: () => this.onConfirmDelete(), label: this.literals['remove']
     };
 
-    this.cancelDeleteAction = {
-      action: () => this.modalDeleteUser.close(), label: this.literals['return']
+    this.confirmReturnToListAction = {
+      label: this.literals['yes'], action: () => this.location.back()
     };
+
+    this.editUserActions = [
+      { label: this.literals['saveClient'], action: this.updateCustomer.bind(this, this.customer), icon: 'thf-icon-plus' },
+      { label: this.literals['return'], action: this.checkUserInteractionOnForm.bind(this, this.formUser) },
+      { label: this.literals['print'], action: () => alert('Imprimir') },
+      { label: this.literals['remove'], action: () => this.modalDeleteUser.open() },
+    ];
 
     this.editUserBreadcrumb = {
       items: [
@@ -125,19 +149,17 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
       ]
     };
 
+    this.newUserActions = [
+      { label: this.literals['saveClient'], action: this.addCustomer.bind(this, this.customer), icon: 'thf-icon-plus' },
+      { label: this.literals['return'], action: this.checkUserInteractionOnForm.bind(this, this.formUser) }
+    ];
+
     this.newUserBreadcrumb = {
       items: [
         { label: this.literals['customers'], link: '/customers' },
         { label: this.literals['addNewClient'], link: '/customers/new-customer' }
       ]
     };
-
-    this.editUserActions = [
-      { label: this.literals['saveClient'], action: this.updateCustomer.bind(this, this.customer), icon: 'thf-icon-plus' },
-      { label: this.literals['return'], action: () => this.location.back() },
-      { label: this.literals['print'], action: () => alert('Imprimir') },
-      { label: this.literals['remove'], action: () => this.modalDeleteUser.open() },
-    ];
 
     this.personalityOptions = [
       { value: 'Crafter', label: this.literals['crafter'] },
@@ -148,10 +170,9 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
       { value: 'Idealista', label: this.literals['idealist'] }
     ];
 
-    this.newUserActions = [
-      { label: this.literals['saveClient'], action: this.addCustomer.bind(this, this.customer), icon: 'thf-icon-plus' },
-      { label: this.literals['return'], action: () => this.location.back() }
-    ];
+    this.returnAction = {
+      action: this.closeModal.bind(this), label: this.literals['return']
+    };
   }
 
   private updateCustomer() {

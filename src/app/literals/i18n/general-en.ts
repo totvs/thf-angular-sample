@@ -4,6 +4,7 @@ export const generalEn = {
   add: 'Add',
   addNewClient: 'Add New Client',
   birthday: 'Birthday Date',
+  cancel: 'Cancel',
   customers: 'Customers',
   code: 'Code',
   confirm: 'Confirmar',
@@ -12,10 +13,14 @@ export const generalEn = {
   edit: 'Edit',
   editClient: 'Edit Client',
   email: 'Email',
+  excludedCustomer: 'Excluded customer(s) with success',
   export: 'Export',
   idealist: 'Idealista',
   influency: 'Influency',
+  insertValue: 'Insert Value',
   inventor: 'Inventor',
+  modalCancelEditUserTitle: 'Deseja cancelar as alterações?',
+  modalCancelEditUserMessage: 'Tem certeza que deseja cancelar as alterações do cadastro do cliente {0}?',
   modalDeleteMessage: 'Are you sure you want to delete client {0} from the client list?',
   modalDeleteTitle: 'Do you want to delete this registration?',
   name: 'Name',
@@ -29,4 +34,5 @@ export const generalEn = {
   return: 'Back',
   saveClient: 'Save Client',
   search: 'Search',
+  yes: 'Yes'
  };

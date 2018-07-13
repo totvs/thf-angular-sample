@@ -3,6 +3,7 @@ export class Customer {
   birthday: string;
   name: string;
   email: string;
+  lookup: string;
   nationality: string;
   personality: string;
   phone: string;
