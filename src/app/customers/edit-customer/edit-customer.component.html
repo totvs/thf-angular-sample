@@ -85,11 +85,11 @@
             t-field-value="nickname"
             t-help="Select favorite spaceship"
             t-label="Hero"
-            [t-placeholder]="literals?.insertValue"
             t-required
             t-title="Favorite spaceship"
             [t-columns]="columns"
-            [t-filter-service]="lookupService">
+            [t-filter-service]="lookupService"
+            [t-placeholder]="literals?.insertValue">
           </thf-lookup>
         </div>
       </form>
