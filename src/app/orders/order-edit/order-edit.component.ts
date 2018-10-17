@@ -8,10 +8,13 @@ import { ThfNotificationService } from '@totvs/thf-ui/services/thf-notification/
 import { ThfSelectOption, ThfLookupColumn } from '@totvs/thf-ui/components/thf-field';
 import { ThfGridColumn } from '@totvs/thf-ui/components/thf-grid';
 
-import { OrdersService } from '../../services/orders.service';
-import { OrderStatusService } from '../../services/order-status.service';
 import { Order } from '../../shared/order';
+import { OrderItem } from '../../shared/order-item';
+import { OrdersService } from '../../services/orders.service';
 import { CustomersService } from '../../services/customers.service';
+import { ProductsService } from '../../services/products.service';
+import { OrderStatusService } from '../../services/order-status.service';
+import { Product } from '../../shared/product';
 
 @Component({
   selector: 'app-order-edit',
@@ -24,7 +27,7 @@ export class OrderEditComponent implements OnInit {
 
   statusOptions: Array<ThfSelectOption>;
   customerColumns: Array<ThfLookupColumn>;
-  itemsColumns: Array<ThfGridColumn>;
+  productColumns: Array<ThfLookupColumn>;
 
   title: string;
   literals = {};
@@ -32,6 +35,7 @@ export class OrderEditComponent implements OnInit {
   editOrder: boolean = false;
   items: Array<Object> = [];
 
+  private editedRowIndex: number;
   private literalsSubscription: Subscription;
   private ordersSubscription: Subscription;
 
@@ -40,7 +44,8 @@ export class OrderEditComponent implements OnInit {
     private thfI18nService: ThfI18nService,
     private ordersService: OrdersService,
     private orderStatusService: OrderStatusService,
-    public customerService: CustomersService,
+    public customersService: CustomersService,
+    public productsService: ProductsService,
     public thfNotification: ThfNotificationService
   ) { }
 
@@ -58,6 +63,52 @@ export class OrderEditComponent implements OnInit {
   ngOnDestroy(): void {
     // this.ordersSubscription.unsubscribe();
     this.literalsSubscription.unsubscribe();
+  }
+
+  onSelected(product: Product, dataItem) {
+    dataItem.productName = product.name;
+  }
+
+  addHandler({sender}, formInstance) {
+    formInstance.reset();
+    this.closeEditor(sender);
+
+    sender.addRow(new OrderItem({
+      quantity: 0,
+      unitPrice: 0
+    }));
+  }
+
+  editHandler({sender, rowIndex, dataItem}) {
+    this.closeEditor(sender);
+
+    this.editedRowIndex = rowIndex;
+
+    sender.editRow(rowIndex);
+  }
+
+  cancelHandler({sender, rowIndex}) {
+    this.closeEditor(sender, rowIndex);
+  }
+
+  saveHandler({sender, rowIndex, dataItem, isNew}) {
+
+    if (isNew) {
+      this.items.push(dataItem);
+    } else {
+      this.items[rowIndex] = dataItem;
+    }
+
+    this.closeEditor(sender, rowIndex);
+  }
+
+  removeHandler({rowIndex}) {
+    this.items.splice(rowIndex, 1);
+  }
+
+  closeEditor(grid, rowIndex = this.editedRowIndex) {
+    grid.closeRow(rowIndex);
+    this.editedRowIndex = undefined;
   }
 
   private getOrder() {
@@ -114,14 +165,14 @@ export class OrderEditComponent implements OnInit {
       }
     ];
 
-    this.itemsColumns = [
+    this.productColumns = [
       {
-        label: this.literals['product'],
-        column: 'productId'
+        label: this.literals['code'],
+        column: 'id'
       },
       {
-        label: this.literals['quantity'],
-        column: 'quantity'
+        label: this.literals['name'],
+        column: 'name'
       }
     ];
 

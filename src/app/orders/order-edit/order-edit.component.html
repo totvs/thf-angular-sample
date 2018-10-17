@@ -10,7 +10,7 @@
         name="customer"
         t-required
         [(ngModel)]="order.customerId"
-        [t-filter-service]="customerService"
+        [t-filter-service]="customersService"
         [t-label]="literals?.customer"
         [t-columns]="customerColumns"
         t-field-value="id"
@@ -35,15 +35,79 @@
         t-disabled>
       </thf-datepicker>
     </div>
+  </form>
 
-    <p class="thf-font-subtitle thf-mb-3">{{ literals?.items }}</p>
+  <form #formGrid="ngForm">
+      <p class="thf-font-subtitle thf-mb-3">{{ literals?.items }}</p>
 
     <div class="thf-row">
-      <thf-grid
+      <!-- <thf-grid
         class="thf-md-12"
         [t-columns]="itemsColumns"
         [t-data]="items">
-    </thf-grid>
+      </thf-grid> -->
+
+      <kendo-grid
+        [data]="items"
+        (edit)="editHandler($event)"
+        (cancel)="cancelHandler($event)"
+        (save)="saveHandler($event)"
+        (remove)="removeHandler($event)"
+        (add)="addHandler($event, formGrid)"
+        [navigable]="true">
+
+        <ng-template kendoGridToolbarTemplate>
+            <button kendoGridAddCommand type="button">{{ literals?.addNew }}</button>
+        </ng-template>
+        
+        <kendo-grid-column field="id" title="#" [editable]="false" width="30">
+            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+              {{rowIndex < 0 ? '' : rowIndex + 1}}
+            </ng-template>
+        </kendo-grid-column>
+        
+        <kendo-grid-column field="productId" [title]="literals?.product">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              {{dataItem.productName}}
+            </ng-template>
+            <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                <thf-lookup
+                name="product"
+                t-required
+                [(ngModel)]="dataItem.productId"
+                [t-filter-service]="productsService"
+                [t-columns]="productColumns"
+                t-field-value="id"
+                t-field-label="name"
+                (t-selected)="onSelected($event, dataItem)">
+              </thf-lookup>        
+            </ng-template>
+        </kendo-grid-column>
+        
+        <kendo-grid-column field="quantity" [title]="literals?.quantity">
+            <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+              <thf-input
+                name="quantity"
+                t-required
+                t-mask="999999"
+                [(ngModel)]="dataItem.quantity">
+              </thf-input>
+            </ng-template>
+        </kendo-grid-column>
+        
+        <kendo-grid-column field="unitPrice" [title]="literals?.price" format="{0:c}" [editable]="false"></kendo-grid-column>
+        
+        <kendo-grid-command-column width="220">
+            <ng-template kendoGridCellTemplate let-isNew="isNew">
+                <button kendoGridEditCommand type="button" [primary]="true">Edit</button>
+                <button kendoGridRemoveCommand type="button">Remove</button>
+                <button
+kendoGridSaveCommand type="button"
+[disabled]="formGrid.invalid || formGrid.pristine">{{ isNew ? 'Add' : 'Update' }}</button>
+                <button kendoGridCancelCommand type="button">{{ isNew ? 'Discard changes' : 'Cancel' }}</button>
+            </ng-template>
+        </kendo-grid-command-column>
+      </kendo-grid>
     </div>
 
   </form>

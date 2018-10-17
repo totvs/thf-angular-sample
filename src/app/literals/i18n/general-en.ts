@@ -53,5 +53,7 @@ export const generalEn = {
   order: 'Order',
   product: 'Product',
   quantity: 'Quantity',
-  items: 'Items'
+  items: 'Items',
+  price: 'Price',
+  addNew: 'Add New'
 };
