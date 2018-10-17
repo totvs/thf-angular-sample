@@ -48,7 +48,10 @@ export const generalEn = {
   applyFilters: 'Apply Filters',
   deletedOrder: 'Order(s) deleted successfully',
   filters: 'Filters',
-  new: 'Novo',
-  newOrder: 'Novo Pedido',
-  order: 'Pedido'
+  new: 'New',
+  newOrder: 'New Order',
+  order: 'Order',
+  product: 'Product',
+  quantity: 'Quantity',
+  items: 'Items'
 };

@@ -50,5 +50,8 @@ export const generalPt = {
   filters: 'Filtros',
   new: 'Novo',
   newOrder: 'Novo Pedido',
-  order: 'Pedido'
+  order: 'Pedido',
+  product: 'Produto',
+  quantity: 'Quantidade',
+  items: 'Itens'
 };

@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
+
 import { ThfBreadcrumb } from '@totvs/thf-ui/components/thf-breadcrumb/thf-breadcrumb.interface';
 import { ThfI18nService } from '@totvs/thf-ui/services/thf-i18n';
+import { ThfNotificationService } from '@totvs/thf-ui/services/thf-notification/thf-notification.service';
+import { ThfSelectOption, ThfLookupColumn } from '@totvs/thf-ui/components/thf-field';
+import { ThfGridColumn } from '@totvs/thf-ui/components/thf-grid';
+
 import { OrdersService } from '../../services/orders.service';
 import { OrderStatusService } from '../../services/order-status.service';
-import { ThfNotificationService } from '@totvs/thf-ui/services/thf-notification/thf-notification.service';
-import { Subscription } from 'rxjs/Subscription';
 import { Order } from '../../shared/order';
 import { CustomersService } from '../../services/customers.service';
-import { ThfSelectOption, ThfLookupColumn } from '@totvs/thf-ui/components/thf-field';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-order-edit',
@@ -21,11 +24,13 @@ export class OrderEditComponent implements OnInit {
 
   statusOptions: Array<ThfSelectOption>;
   customerColumns: Array<ThfLookupColumn>;
+  itemsColumns: Array<ThfGridColumn>;
 
   title: string;
   literals = {};
   order: Order = new Order();
   editOrder: boolean = false;
+  items: Array<Object> = [];
 
   private literalsSubscription: Subscription;
   private ordersSubscription: Subscription;
@@ -106,6 +111,17 @@ export class OrderEditComponent implements OnInit {
       {
         label: this.literals['name'],
         column: 'name'
+      }
+    ];
+
+    this.itemsColumns = [
+      {
+        label: this.literals['product'],
+        column: 'productId'
+      },
+      {
+        label: this.literals['quantity'],
+        column: 'quantity'
       }
     ];
 

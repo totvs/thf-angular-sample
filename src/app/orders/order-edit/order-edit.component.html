@@ -5,7 +5,7 @@
   <form #formEdit="ngForm">
 
     <div class="thf-row">
-      <thf-lookup 
+      <thf-lookup
         class="thf-md-4"
         name="customer"
         t-required
@@ -25,7 +25,7 @@
         [t-label]="literals?.status"
         [t-options]="statusOptions">
       </thf-select>
-      
+
       <thf-datepicker
         class="thf-md-4"
         name="date"
@@ -36,8 +36,14 @@
       </thf-datepicker>
     </div>
 
-    <div class="thf-row">
+    <p class="thf-font-subtitle thf-mb-3">{{ literals?.items }}</p>
 
+    <div class="thf-row">
+      <thf-grid
+        class="thf-md-12"
+        [t-columns]="itemsColumns"
+        [t-data]="items">
+    </thf-grid>
     </div>
 
   </form>
