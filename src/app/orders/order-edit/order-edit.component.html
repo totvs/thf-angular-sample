@@ -1,0 +1,45 @@
+<thf-page-edit
+  [t-breadcrumb]="breadcrumb"
+  [t-title]="title">
+
+  <form #formEdit="ngForm">
+
+    <div class="thf-row">
+      <thf-lookup 
+        class="thf-md-4"
+        name="customer"
+        t-required
+        [(ngModel)]="order.customerId"
+        [t-filter-service]="customerService"
+        [t-label]="literals?.customer"
+        [t-columns]="customerColumns"
+        t-field-value="id"
+        t-filed-label="name">
+      </thf-lookup>
+
+      <thf-select
+        class="thf-md-4"
+        name="status"
+        t-required
+        [(ngModel)]="order.status"
+        [t-label]="literals?.status"
+        [t-options]="statusOptions">
+      </thf-select>
+      
+      <thf-datepicker
+        class="thf-md-4"
+        name="date"
+        t-required
+        [(ngModel)]="order.date"
+        [t-label]="literals?.date"
+        t-disabled>
+      </thf-datepicker>
+    </div>
+
+    <div class="thf-row">
+
+    </div>
+
+  </form>
+
+</thf-page-edit>

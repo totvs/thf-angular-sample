@@ -5,11 +5,14 @@ const middlewares = jsonServer.defaults()
 
 router.render = (req, res) => {
 
-  res.jsonp({
-    hasNext: false,
-    // items: res.locals.data
-    items: res.locals.data.length > 1 ? res.locals.data : [res.locals.data]
-  })
+  if (req.route.path === '/') {
+    res.jsonp({
+      hasNext: false,
+      items: res.locals.data
+    });
+  } else {
+      res.jsonp(res.locals.data);
+  }
 }
 
 server.use(middlewares);

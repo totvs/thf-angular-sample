@@ -133,8 +133,24 @@
       "nickname": "Sand Crawler"
     }
   ],
-  "orders": [],
-  "items": [],
+  "orders": [
+    {
+      "id": 1,
+      "customerId": 1,
+      "date": "2018-10-05T14:48:00.000Z",
+      "status": "",
+      "total": 150000
+    }
+  ],
+  "items": [
+    {
+      "id": 1,
+      "orderId": 1,
+      "productId": 1,
+      "unitPrice": 150000,
+      "quantity": 1
+    }
+  ],
   "products": [
     {
       "id": 1,

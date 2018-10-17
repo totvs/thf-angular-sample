@@ -1,0 +1,43 @@
+<thf-page-list
+  t-show-more-disabled="true"
+  [t-title]= "literals?.orders"
+  [t-actions]="pageActions"
+  [t-breadcrumb]="breadcrumb"
+  [t-disclaimer-group]="disclaimerGroup"
+  [t-filter]="filterSettings">
+
+  <thf-table
+    t-checkbox="true"
+    t-hide-select-all="false"
+    [t-loading]="isLoading"
+    [t-actions]="tableActions"
+    [t-columns]="columns"
+    [t-items]="items">
+  </thf-table>
+</thf-page-list>
+
+<thf-modal #modalDelete
+  t-close
+  t-size="sm"
+  [t-title]="literals?.modalDeleteTitle"
+  [t-primary-action]="confirmDeleteAction"
+  [t-secondary-action]="cancelDeleteAction">
+
+  <div class="thf-font-text-large thf-text-left">{{ literals?.modalDeleteOrder | thfI18n:[''] }}</div>
+</thf-modal>
+
+<thf-modal
+  #advancedFilterModal
+  t-title="Advanced filter"
+  [t-primary-action]="advancedFilterPrimaryAction">
+
+  <form #f="ngForm">
+      <thf-select
+      class="thf-md-6"
+      name="status"
+      [(ngModel)]="orderStatus"
+      [t-label]="literals?.status"
+      [t-options]="statusOptions">
+    </thf-select>
+  </form>
+</thf-modal>

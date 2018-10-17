@@ -6,6 +6,7 @@ export const generalEn = {
   birthday: 'Birthday Date',
   cancel: 'Cancel',
   customers: 'Customers',
+  customer: 'Customer',
   code: 'Code',
   confirm: 'Confirmar',
   controller: 'Controlador',
@@ -34,5 +35,20 @@ export const generalEn = {
   return: 'Back',
   saveClient: 'Save Client',
   search: 'Search',
-  yes: 'Yes'
- };
+  yes: 'Yes',
+  orders: 'Orders',
+  addNewOrder: 'Add New Order',
+  date: 'Date',
+  total: 'Total',
+  modalDeleteOrder: 'Are you sure you want to delete 3 {0}?',
+  status: 'Status',
+  pending: 'Pending',
+  cancelled: 'Cancelled',
+  completed: 'Completed',
+  applyFilters: 'Apply Filters',
+  deletedOrder: 'Order(s) deleted successfully',
+  filters: 'Filters',
+  new: 'Novo',
+  newOrder: 'Novo Pedido',
+  order: 'Pedido'
+};
