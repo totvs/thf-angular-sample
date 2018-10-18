@@ -50,8 +50,15 @@ export const generalPt = {
   filters: 'Filtros',
   new: 'Novo',
   newOrder: 'Novo Pedido',
+  editOrder: 'Editar Pedido ',
   order: 'Pedido',
   product: 'Produto',
   quantity: 'Quantidade',
-  items: 'Itens'
+  items: 'Itens',
+  price: 'Preço',
+  addNew: 'Adicionar novo',
+  discardChanges: 'Descartar alterações',
+  update: 'Atualziar',
+  orderSucessfullyCreated: 'Pedido criado com sucesso',
+  orderSucessfullyUpdated: 'Pedido atualizado com sucesso'
 };
