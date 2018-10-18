@@ -5,7 +5,7 @@ const middlewares = jsonServer.defaults()
 
 router.render = (req, res) => {
 
-  if (req.route.path === '/') {
+  if (req.method === 'GET' && req.route.path === '/') {
     res.jsonp({
       hasNext: false,
       items: res.locals.data

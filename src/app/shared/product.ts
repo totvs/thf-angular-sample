@@ -3,7 +3,7 @@ export class Product {
     name: string;
     model: string;
     manufacturer: string;
-    cost_in_credits: string;
+    price: number;
     length: string;
     max_atmosphering_speed: string;
     crew: string;

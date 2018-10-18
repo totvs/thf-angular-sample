@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Order } from '../shared/order';
 import { TotvsResponse } from '../shared/totvs-response.interface';
+import { OrderItem } from '../shared/order-item';
 
 @Injectable()
 export class OrdersService {
 
-  private apiUrl = 'http://localhost:3000/orders';
+  private apiUrl = 'http://localhost:3000/';
 
   constructor(private http: HttpClient) { }
 
@@ -19,9 +20,10 @@ export class OrdersService {
       params = { _expand: 'customer'};
     }
 
-    return this.http.get(this.apiUrl, { params }).map((response: TotvsResponse<Order>) => {
+    return this.http.get(`${this.apiUrl}orders`, { params }).map((response: TotvsResponse<Order>) => {
       response.items = response.items.map(item => {
         item.customerName = item.customer.name;
+        delete item.customer;
         return item;
       });
 
@@ -37,24 +39,18 @@ export class OrdersService {
   }
 
   getOrder(id: number) {
-    return this.http.get(`${this.apiUrl}/${id}`, { params: {_expand: 'customer'} })
-      .map((response: any) => {
-        response.customerName = response.customer.name;
-        return response;
-      });
+    return this.http.get(`${this.apiUrl}orders/${id}`);
   }
 
   addOrder(order: Order) {
-    return this.http.post(this.apiUrl, order);
+    return this.http.post(`${this.apiUrl}orders`, order);
   }
 
   deleteOrder(id: number) {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    return this.http.delete(`${this.apiUrl}orders/${id}`);
   }
 
   updateOrder(order: Order) {
-    const url = `${this.apiUrl}/${order.id}`;
-
-    return this.http.put(url, order);
+    return this.http.put(`${this.apiUrl}orders/${order.id}`, order);
   }
 }

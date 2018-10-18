@@ -1,6 +1,7 @@
 <thf-page-edit
   [t-breadcrumb]="breadcrumb"
-  [t-title]="title">
+  [t-title]="title"
+  [t-disable-submit]="formEdit.invalid && formGrid.invalid">
 
   <form #formEdit="ngForm">
 
@@ -41,14 +42,8 @@
       <p class="thf-font-subtitle thf-mb-3">{{ literals?.items }}</p>
 
     <div class="thf-row">
-      <!-- <thf-grid
-        class="thf-md-12"
-        [t-columns]="itemsColumns"
-        [t-data]="items">
-      </thf-grid> -->
-
       <kendo-grid
-        [data]="items"
+        [data]="order.items"
         (edit)="editHandler($event)"
         (cancel)="cancelHandler($event)"
         (save)="saveHandler($event)"
@@ -100,11 +95,11 @@
         <kendo-grid-command-column width="220">
             <ng-template kendoGridCellTemplate let-isNew="isNew">
                 <button kendoGridEditCommand type="button" [primary]="true">Edit</button>
-                <button kendoGridRemoveCommand type="button">Remove</button>
+                <button kendoGridRemoveCommand type="button">{{literals?.remove}}</button>
                 <button
 kendoGridSaveCommand type="button"
-[disabled]="formGrid.invalid || formGrid.pristine">{{ isNew ? 'Add' : 'Update' }}</button>
-                <button kendoGridCancelCommand type="button">{{ isNew ? 'Discard changes' : 'Cancel' }}</button>
+[disabled]="formGrid.invalid || formGrid.pristine">{{ isNew ? literals?.add : literals?.update }}</button>
+                <button kendoGridCancelCommand type="button">{{ isNew ? literals?.discardChanges : literals?.cancel }}</button>
             </ng-template>
         </kendo-grid-command-column>
       </kendo-grid>

@@ -37,7 +37,6 @@ export class OrderListComponent implements OnInit {
   tableActions: Array<ThfPageAction>;
 
   columns: Array<ThfTableColumn>;
-  itemsFiltered: Array<Order>;
   items: Array<Order>;
 
   literals = {};
@@ -141,13 +140,21 @@ export class OrderListComponent implements OnInit {
     this.applyFilter();
   }
 
+  private openDeleteModal() {
+    const selectedOrders = this.items.filter((order: any) => order.$selected);
+
+    if (selectedOrders.length > 0) {
+          this.modalDelete.open();
+    }
+  }
+
   private onConfirmDelete() {
     this.modalDelete.close();
     this.deleteOrder();
   }
 
   private deleteOrder() {
-    const selectedOrders = this.itemsFiltered.filter((order: any) => order.$selected);
+    const selectedOrders = this.items.filter((order: any) => order.$selected);
 
     if (selectedOrders.length > 0) {
       selectedOrders.map(((order: Order) => {
@@ -184,7 +191,7 @@ export class OrderListComponent implements OnInit {
       { label: this.literals['addNewOrder'], action: () => this.router.navigate(['/orders/new']), icon: 'thf-icon-plus' },
       { label: this.literals['print'], action: () => alert('Ação Imprimir')},
       { label: this.literals['export'], action: () => alert('Exportando')},
-      { label: this.literals['remove'], action: () => this.modalDelete.open()},
+      { label: this.literals['remove'], action: () => this.openDeleteModal()},
       { label: this.literals['actions'], action: () => alert('Ação 2') }
     ];
 

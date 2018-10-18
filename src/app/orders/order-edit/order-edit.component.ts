@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
 import { ThfBreadcrumb } from '@totvs/thf-ui/components/thf-breadcrumb/thf-breadcrumb.interface';
@@ -33,13 +33,14 @@ export class OrderEditComponent implements OnInit {
   literals = {};
   order: Order = new Order();
   editOrder: boolean = false;
-  items: Array<Object> = [];
 
+  private orderId;
   private editedRowIndex: number;
   private literalsSubscription: Subscription;
   private ordersSubscription: Subscription;
 
   constructor(
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private thfI18nService: ThfI18nService,
     private ordersService: OrdersService,
@@ -47,9 +48,18 @@ export class OrderEditComponent implements OnInit {
     public customersService: CustomersService,
     public productsService: ProductsService,
     public thfNotification: ThfNotificationService
-  ) { }
+  ) {
+    this.order.total = 0;
+    this.order.items = [];
+  }
 
   ngOnInit() {
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    if (id) {
+      this.orderId = id;
+      this.editOrder = true;
+    }
+
     this.literalsSubscription = this.thfI18nService.getLiterals().subscribe(literals => {
       this.literals = literals;
       this.setLiteralsDefaultValues();
@@ -65,8 +75,29 @@ export class OrderEditComponent implements OnInit {
     this.literalsSubscription.unsubscribe();
   }
 
+  save() {
+    if (this.editOrder) {
+      this.ordersService.updateOrder(this.order)
+        .subscribe(response => {
+          this.router.navigate(['/orders']);
+          this.thfNotification.success(this.literals['orderSucessfullyUpdated']);
+        });
+    } else {
+      this.ordersService.addOrder(this.order)
+        .subscribe(response => {
+          this.router.navigate(['/orders']);
+          this.thfNotification.success(this.literals['orderSucessfullyCreated']);
+        });
+    }
+  }
+
+  cancel() {
+      this.router.navigate(['/orders']);
+  }
+
   onSelected(product: Product, dataItem) {
     dataItem.productName = product.name;
+    dataItem.unitPrice = product.price;
   }
 
   addHandler({sender}, formInstance) {
@@ -81,9 +112,7 @@ export class OrderEditComponent implements OnInit {
 
   editHandler({sender, rowIndex, dataItem}) {
     this.closeEditor(sender);
-
     this.editedRowIndex = rowIndex;
-
     sender.editRow(rowIndex);
   }
 
@@ -94,16 +123,17 @@ export class OrderEditComponent implements OnInit {
   saveHandler({sender, rowIndex, dataItem, isNew}) {
 
     if (isNew) {
-      this.items.push(dataItem);
+      this.order.items.push(dataItem);
     } else {
-      this.items[rowIndex] = dataItem;
+      this.order.items[rowIndex] = dataItem;
     }
+    this.order.total += dataItem.unitPrice * dataItem.quantity;
 
     this.closeEditor(sender, rowIndex);
   }
 
   removeHandler({rowIndex}) {
-    this.items.splice(rowIndex, 1);
+    this.order.items.splice(rowIndex, 1);
   }
 
   closeEditor(grid, rowIndex = this.editedRowIndex) {
@@ -112,11 +142,9 @@ export class OrderEditComponent implements OnInit {
   }
 
   private getOrder() {
-    const id = +this.activatedRoute.snapshot.paramMap.get('id');
-
-    if (id) {
+    if (this.orderId) {
       this.editOrder = true;
-      this.ordersService.getOrder(id).subscribe((order: Order) => {
+      this.ordersService.getOrder(this.orderId).subscribe((order: Order) => {
         this.order = order;
       });
     } else {
@@ -128,20 +156,12 @@ export class OrderEditComponent implements OnInit {
 
   private setLiteralsDefaultValues() {
 
-    // this.pageActions = [
-    //   { label: this.literals['addNewOrder'], action: () => this.router.navigate(['/orders/new']), icon: 'thf-icon-plus' },
-    //   { label: this.literals['print'], action: () => alert('Ação Imprimir')},
-    //   { label: this.literals['export'], action: () => alert('Exportando')},
-    //   { label: this.literals['remove'], action: () => this.modalDelete.open()},
-    //   { label: this.literals['actions'], action: () => alert('Ação 2') }
-    // ];
-
     if (this.editOrder) {
-      this.title = this.literals['order'];
+      this.title = `${this.literals['editOrder']}${this.orderId}`;
       this.breadcrumb = {
         items: [
           { label: this.literals['orders'], link: '/orders' },
-          { label: this.literals['new'] }
+          { label: this.literals['edit'] }
         ]
       };
     } else {

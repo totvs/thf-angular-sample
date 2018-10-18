@@ -52,7 +52,7 @@ export class CustomersComponent implements OnDestroy, OnInit {
   private customersSubscription: Subscription;
   private literalsSubscription: Subscription;
 
-  @ViewChild('modalDeleteUser') modalDeleteUser: ThfModalComponent;
+  @ViewChild('modalDelete') modalDelete: ThfModalComponent;
   @ViewChild('advancedFilterModal') advancedFilterModal: ThfModalComponent;
 
   constructor(
@@ -140,7 +140,7 @@ export class CustomersComponent implements OnDestroy, OnInit {
   }
 
   private onConfirmDelete() {
-    this.modalDeleteUser.close();
+    this.modalDelete.close();
     this.deleteCustomer();
   }
 
@@ -180,14 +180,14 @@ export class CustomersComponent implements OnDestroy, OnInit {
     };
 
     this.cancelDeleteAction = {
-      action: () => this.modalDeleteUser.close(), label: this.literals['return']
+      action: () => this.modalDelete.close(), label: this.literals['return']
     };
 
     this.pageActions = [
       { label: this.literals['addNewClient'], action: () => this.router.navigate(['/new-customer']), icon: 'thf-icon-plus' },
       { label: this.literals['print'], action: () => alert('Ação Imprimir')},
       { label: this.literals['export'], action: () => alert('Exportando')},
-      { label: this.literals['remove'], action: () => this.modalDeleteUser.open()},
+      { label: this.literals['remove'], action: () => this.modalDelete.open()},
       { label: this.literals['actions'], action: () => alert('Ação 2') }
     ];
 
