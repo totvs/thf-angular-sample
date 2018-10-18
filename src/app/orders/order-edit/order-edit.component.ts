@@ -6,7 +6,6 @@ import { ThfBreadcrumb } from '@totvs/thf-ui/components/thf-breadcrumb/thf-bread
 import { ThfI18nService } from '@totvs/thf-ui/services/thf-i18n';
 import { ThfNotificationService } from '@totvs/thf-ui/services/thf-notification/thf-notification.service';
 import { ThfSelectOption, ThfLookupColumn } from '@totvs/thf-ui/components/thf-field';
-import { ThfGridColumn } from '@totvs/thf-ui/components/thf-grid';
 
 import { Order } from '../../shared/order';
 import { OrderItem } from '../../shared/order-item';
