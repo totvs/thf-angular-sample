@@ -1,19 +1,22 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ThfI18nService } from '@totvs/thf-ui/services/thf-i18n';
-import { Subscription } from 'rxjs/Subscription';
-import { ThfPageAction, ThfPageFilter } from '@totvs/thf-ui/components/thf-page';
 import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { Subscription } from 'rxjs/Subscription';
+
+import { ThfI18nService } from '@totvs/thf-ui/services/thf-i18n';
+import { ThfPageAction, ThfPageFilter } from '@totvs/thf-ui/components/thf-page';
 import { ThfBreadcrumb } from '@totvs/thf-ui/components/thf-breadcrumb/thf-breadcrumb.interface';
 import { ThfDisclaimerGroup } from '@totvs/thf-ui/components/thf-disclaimer-group';
 import { ThfModalComponent } from '@totvs/thf-ui/components/thf-modal/thf-modal.component';
-import { OrdersService } from '../../services/orders.service';
 import { ThfTableColumn } from '@totvs/thf-ui/components/thf-table';
-import { Order } from '../../shared/order';
-import { TotvsResponse } from '../../shared/totvs-response.interface';
 import { ThfDisclaimer } from '@totvs/thf-ui/components/thf-disclaimer/thf-disclaimer.interface';
 import { ThfModalAction } from '@totvs/thf-ui/components/thf-modal';
 import { ThfNotificationService } from '@totvs/thf-ui/services/thf-notification/thf-notification.service';
 import { ThfSelectOption } from '@totvs/thf-ui/components/thf-field';
+
+import { Order } from '../../shared/order';
+import { TotvsResponse } from '../../shared/totvs-response.interface';
+import { OrdersService } from '../../services/orders.service';
 import { OrderStatusService } from '../../services/order-status.service';
 
 @Component({
