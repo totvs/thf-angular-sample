@@ -12,8 +12,7 @@
       "personality": [
         "Crafter",
         "Protetor"
-      ],
-      "lookup": "Y-wing"
+      ]
     },
     {
       "id": 2,
@@ -133,7 +132,44 @@
       "nickname": "Sand Crawler"
     }
   ],
-  "orders": [],
+  "orders": [
+    {
+      "total": 145000,
+      "items": [
+        {
+          "quantity": "10",
+          "unitPrice": 14500,
+          "productId": 2,
+          "productName": "T-16 skyhopper"
+        }
+      ],
+      "date": "2018-10-29T10:11:30-03:00",
+      "status": "1",
+      "customerId": 4,
+      "id": 1
+    },
+    {
+      "total": 14344950,
+      "items": [
+        {
+          "quantity": "50",
+          "unitPrice": 285000,
+          "productId": 5,
+          "productName": "Sail barge"
+        },
+        {
+          "quantity": "9",
+          "unitPrice": 10550,
+          "productId": 3,
+          "productName": "X-34 landspeeder"
+        }
+      ],
+      "date": "2018-10-29T10:15:46-03:00",
+      "status": "2",
+      "customerId": 4,
+      "id": 2
+    }
+  ],
   "products": [
     {
       "id": 1,

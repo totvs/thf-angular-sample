@@ -38,9 +38,11 @@
     </div>
   </form>
 
-  <form #formGrid="ngForm">
-      <p class="thf-font-subtitle thf-mb-3">{{ literals?.items }}</p>
+  <div class="thf-row">
+    <p class="thf-font-subtitle thf-mb-3 thf-pl-1">{{ literals?.items }}</p>
+  </div>
 
+  <form #formGrid="ngForm">
     <div class="thf-row">
       <kendo-grid
         [data]="order.items"

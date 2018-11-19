@@ -70,7 +70,6 @@ export class OrderEditComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    // this.ordersSubscription.unsubscribe();
     this.literalsSubscription.unsubscribe();
   }
 
