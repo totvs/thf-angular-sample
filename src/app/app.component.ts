@@ -7,9 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  titleToolbar = 'THF-CRUD';
+  titleToolbar = 'TOTVS HTML Framework - Angular Sample';
 
   menus = [
-    { label: 'Customers', link: './customers' },
+    { label: 'CRUD', link: './customers' },
+    { label: 'Master Detail', link: './orders' },
   ];
 }

@@ -12,7 +12,8 @@
       "personality": [
         "Crafter",
         "Protetor"
-      ]
+      ],
+      "lookup": "Y-wing"
     },
     {
       "id": 2,
@@ -134,40 +135,20 @@
   ],
   "orders": [
     {
-      "total": 145000,
-      "items": [
-        {
-          "quantity": "10",
-          "unitPrice": 14500,
-          "productId": 2,
-          "productName": "T-16 skyhopper"
-        }
-      ],
-      "date": "2018-10-29T10:11:30-03:00",
-      "status": "1",
-      "customerId": 4,
-      "id": 1
-    },
+      "id": 1,
+      "customerId": 1,
+      "date": "2018-10-05T14:48:00.000Z",
+      "status": "",
+      "total": 150000
+    }
+  ],
+  "items": [
     {
-      "total": 14344950,
-      "items": [
-        {
-          "quantity": "50",
-          "unitPrice": 285000,
-          "productId": 5,
-          "productName": "Sail barge"
-        },
-        {
-          "quantity": "9",
-          "unitPrice": 10550,
-          "productId": 3,
-          "productName": "X-34 landspeeder"
-        }
-      ],
-      "date": "2018-10-29T10:15:46-03:00",
-      "status": "2",
-      "customerId": 4,
-      "id": 2
+      "id": 1,
+      "orderId": 1,
+      "productId": 1,
+      "unitPrice": 150000,
+      "quantity": 1
     }
   ],
   "products": [
@@ -176,7 +157,7 @@
       "name": "Sand Crawler",
       "model": "Digger Crawler",
       "manufacturer": "Corellia Mining Corporation",
-      "price": 150000,
+      "cost_in_credits": "150000",
       "length": "36.8",
       "max_atmosphering_speed": "30",
       "crew": "46",
@@ -186,11 +167,11 @@
       "vehicle_class": "wheeled"
     },
     {
-      "id": 2,
+      "ïd": 2,
       "name": "T-16 skyhopper",
       "model": "T-16 skyhopper",
       "manufacturer": "Incom Corporation",
-      "price": 14500,
+      "cost_in_credits": "14500",
       "length": "10.4",
       "max_atmosphering_speed": "1200",
       "crew": "1",
@@ -204,7 +185,7 @@
       "name": "X-34 landspeeder",
       "model": "X-34 landspeeder",
       "manufacturer": "SoroSuub Corporation",
-      "price": 10550,
+      "cost_in_credits": "10550",
       "length": "3.4",
       "max_atmosphering_speed": "250",
       "crew": "1",
@@ -215,10 +196,80 @@
     },
     {
       "id": 4,
+      "name": "TIE/LN starfighter",
+      "model": "Twin Ion Engine/Ln Starfighter",
+      "manufacturer": "Sienar Fleet Systems",
+      "cost_in_credits": "unknown",
+      "length": "6.4",
+      "max_atmosphering_speed": "1200",
+      "crew": "1",
+      "passengers": "0",
+      "cargo_capacity": "65",
+      "consumables": "2 days",
+      "vehicle_class": "starfighter"
+    },
+    {
+      "id": 5,
+      "name": "Snowspeeder",
+      "model": "t-47 airspeeder",
+      "manufacturer": "Incom corporation",
+      "cost_in_credits": "unknown",
+      "length": "4.5",
+      "max_atmosphering_speed": "650",
+      "crew": "2",
+      "passengers": "0",
+      "cargo_capacity": "10",
+      "consumables": "none",
+      "vehicle_class": "airspeeder"
+    },
+    {
+      "id": 6,
+      "name": "TIE bomber",
+      "model": "TIE/sa bomber",
+      "manufacturer": "Sienar Fleet Systems",
+      "cost_in_credits": "unknown",
+      "length": "7.8",
+      "max_atmosphering_speed": "850",
+      "crew": "1",
+      "passengers": "0",
+      "cargo_capacity": "none",
+      "consumables": "2 days",
+      "vehicle_class": "space/planetary bomber"
+    },
+    {
+      "id": 7,
+      "name": "AT-AT",
+      "model": "All Terrain Armored Transport",
+      "manufacturer": "Kuat Drive Yards, Imperial Department of Military Research",
+      "cost_in_credits": "unknown",
+      "length": "20",
+      "max_atmosphering_speed": "60",
+      "crew": "5",
+      "passengers": "40",
+      "cargo_capacity": "1000",
+      "consumables": "unknown",
+      "vehicle_class": "assault walker"
+    },
+    {
+      "id": 8,
+      "name": "AT-ST",
+      "model": "All Terrain Scout Transport",
+      "manufacturer": "Kuat Drive Yards, Imperial Department of Military Research",
+      "cost_in_credits": "unknown",
+      "length": "2",
+      "max_atmosphering_speed": "90",
+      "crew": "2",
+      "passengers": "0",
+      "cargo_capacity": "200",
+      "consumables": "none",
+      "vehicle_class": "walker"
+    },
+    {
+      "id": 9,
       "name": "Storm IV Twin-Pod cloud car",
       "model": "Storm IV Twin-Pod",
       "manufacturer": "Bespin Motors",
-      "price": 75000,
+      "cost_in_credits": "75000",
       "length": "7",
       "max_atmosphering_speed": "1500",
       "crew": "2",
@@ -228,11 +279,11 @@
       "vehicle_class": "repulsorcraft"
     },
     {
-      "id": 5,
+      "id": 10,
       "name": "Sail barge",
       "model": "Modified Luxury Sail Barge",
       "manufacturer": "Ubrikkian Industries Custom Vehicle Division",
-      "price": 285000,
+      "cost_in_credits": "285000",
       "length": "30",
       "max_atmosphering_speed": "100",
       "crew": "26",

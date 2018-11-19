@@ -116,7 +116,7 @@ export class EditCustomerComponent implements OnInit, OnDestroy {
     if (id) {
       this.isPageEdit = true;
       this.customersService.getCustomer(id).subscribe((customer: Customer) => {
-        this.customer = customer[0];
+        this.customer = customer;
       });
     }
   }

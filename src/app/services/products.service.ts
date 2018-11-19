@@ -1,41 +1,36 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Product } from '../shared/product';
+import { ThfLookupFilter } from '@totvs/thf-ui/components/thf-field';
 import { Observable } from 'rxjs/Observable';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw';
-
-import { Customer } from '../shared/customer';
-import { ThfLookupFilter } from '@totvs/thf-ui/components/thf-field';
-
 @Injectable()
-export class CustomersService implements ThfLookupFilter {
+export class ProductsService implements ThfLookupFilter {
 
-  private apiUrl = 'http://localhost:3000/customers';
+  private apiUrl = 'http://localhost:3000/products';
 
   constructor(private http: HttpClient) { }
 
-  getCustomers() {
+  getProducts() {
     return this.http.get(this.apiUrl);
   }
 
-  getCustomer(id: string) {
+  getProduct(id: number) {
     return this.http.get(`${this.apiUrl}/${id}`);
   }
 
-  addCustomer(customer: Customer) {
-    return this.http.post(this.apiUrl, customer);
+  addProduct(product: Product) {
+    return this.http.post(this.apiUrl, product);
   }
 
-  deleteCustomer(id: string) {
+  deleteProduct(id: number) {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
-  updateCustomer(customer: Customer) {
-    const url = `${this.apiUrl}/${customer.id}`;
+  updateProduct(product: Product) {
+    const url = `${this.apiUrl}/${product.id}`;
 
-    return this.http.put(url, customer);
+    return this.http.put(url, product);
   }
 
   getFilteredData(filter: string, page: number, pageSize: number): Observable<any> {

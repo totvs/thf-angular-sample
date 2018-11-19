@@ -1,6 +1,6 @@
 <thf-page-list
   t-show-more-disabled="true"
-  [t-title]= "literals?.customers"
+  [t-title]= "literals?.orders"
   [t-actions]="pageActions"
   [t-breadcrumb]="breadcrumb"
   [t-disclaimer-group]="disclaimerGroup"
@@ -8,11 +8,11 @@
 
   <thf-table
     t-checkbox="true"
-    t-hide-select-all="false"
+    t-hide-select-all="true"
     [t-loading]="isLoading"
     [t-actions]="tableActions"
     [t-columns]="columns"
-    [t-items]="itemsFiltered">
+    [t-items]="items">
   </thf-table>
 </thf-page-list>
 
@@ -23,7 +23,7 @@
   [t-primary-action]="confirmDeleteAction"
   [t-secondary-action]="cancelDeleteAction">
 
-  <div class="thf-font-text-large thf-text-left">{{ literals?.modalDeleteMessage | thfI18n:[''] }}</div>
+  <div class="thf-font-text-large thf-text-left">{{ literals?.modalDeleteOrder | thfI18n:[''] }}</div>
 </thf-modal>
 
 <thf-modal
@@ -35,10 +35,9 @@
       <thf-select
       class="thf-md-6"
       name="status"
-      [(ngModel)]="customerStatus"
-      [t-label]="literals?.influency"
+      [(ngModel)]="orderStatus"
+      [t-label]="literals?.status"
       [t-options]="statusOptions">
     </thf-select>
   </form>
-
 </thf-modal>

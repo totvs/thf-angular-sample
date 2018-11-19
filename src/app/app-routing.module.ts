@@ -7,7 +7,8 @@ import { EditCustomerComponent } from './customers/edit-customer/edit-customer.c
 const routes: Routes = [
   { path: 'customers', component: CustomersComponent },
   { path: 'edit/:id', component: EditCustomerComponent },
-  { path: 'new-customer', component: EditCustomerComponent }
+  { path: 'new-customer', component: EditCustomerComponent },
+  { path: 'orders', loadChildren: 'app/orders/orders.module#OrdersModule' }
 ];
 
 @NgModule({

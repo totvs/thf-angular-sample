@@ -19,6 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "../node_modules/@progress/kendo-theme-default/dist/all.css",
+        "../node_modules/@totvs/thf-ui/assets/style/custom-telerik.css",
         "../node_modules/@totvs/thf-theme/css/thf-theme-default.min.css",
         "styles.css"
       ],
