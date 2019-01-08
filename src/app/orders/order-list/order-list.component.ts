@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 import { ThfI18nService } from '@totvs/thf-ui/services/thf-i18n';
 import { ThfPageAction, ThfPageFilter } from '@totvs/thf-ui/components/thf-page';
@@ -75,6 +75,7 @@ export class OrderListComponent implements OnInit {
     });
 
     this.statusOptions = this.orderStatusService.getStatusOptions();
+    this.getOrders();
   }
 
   ngOnDestroy(): void {

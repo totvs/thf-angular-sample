@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Order } from '../shared/order';
 import { TotvsResponse } from '../shared/totvs-response.interface';
-import { OrderItem } from '../shared/order-item';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class OrdersService {
@@ -20,22 +20,24 @@ export class OrdersService {
       params = { _expand: 'customer'};
     }
 
-    return this.http.get(`${this.apiUrl}orders`, { params }).map((response: TotvsResponse<Order>) => {
-      response.items = response.items.map(item => {
-        item.customerName = item.customer.name;
-        delete item.customer;
-        return item;
-      });
+    return this.http.get(`${this.apiUrl}orders`, { params }).pipe(
+        map((response: TotvsResponse<Order>) => {
+          response.items = response.items.map(item => {
+            item.customerName = item.customer.name;
+            delete item.customer;
+            return item;
+          });
 
-      if (search) {
-        search = search.toLocaleLowerCase();
-        response.items = response.items
-          .filter(item => Object.keys(item)
-            .some(key => !(item[key] instanceof Object) && (String(item[key]).toLocaleLowerCase().includes(search)))
-        );
-      }
-      return response;
-    });
+          if (search) {
+            search = search.toLocaleLowerCase();
+            response.items = response.items
+              .filter(item => Object.keys(item)
+                .some(key => !(item[key] instanceof Object) && (String(item[key]).toLocaleLowerCase().includes(search)))
+            );
+          }
+          return response;
+        })
+      );
   }
 
   getOrder(id: number) {
