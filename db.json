@@ -241,5 +241,22 @@
       "consumables": "Live food tanks",
       "vehicle_class": "sail barge"
     }
+  ],
+  "processes": [
+    {
+      "id": 1,
+      "processID": "1",
+      "description": "Exemplo de agendamento"
+    }
+  ],
+  "parameters": [
+    {
+      "property": "server",
+      "processId": 1
+    },
+    {
+      "property": "program",
+      "processId": 1
+    }
   ]
 }

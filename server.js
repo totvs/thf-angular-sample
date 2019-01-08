@@ -16,7 +16,9 @@ router.render = (req, res) => {
 }
 
 server.use(middlewares);
-
+server.use(jsonServer.rewriter({
+  '/jobschedulers/*': '/$1'
+}))
 server.use(router)
 server.listen(3000, () => {
   console.log('JSON Server is running')

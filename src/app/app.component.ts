@@ -12,5 +12,6 @@ export class AppComponent {
   menus = [
     { label: 'CRUD', link: './customers' },
     { label: 'Master Detail', link: './orders' },
+    { label: 'Agendamento', link: './jobScheduler' },
   ];
 }
