@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Product } from '../shared/product';
 import { ThfLookupFilter } from '@totvs/thf-ui/components/thf-field';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class ProductsService implements ThfLookupFilter {
