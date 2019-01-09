@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 
 import { ThfModule } from '@totvs/thf-ui';
 import { ThfI18nConfig, ThfI18nModule } from '@totvs/thf-ui/services/thf-i18n';
+import { ThfTemplatesModule } from '@totvs/thf-templates';
 
 import { generalEn } from './literals/i18n/general-en';
 import { generalPt } from './literals/i18n/general-pt';
@@ -41,7 +42,8 @@ const i18nConfig: ThfI18nConfig = {
     HttpClientModule,
     RouterModule.forRoot([]),
     ThfModule,
-    ThfI18nModule.config(i18nConfig)
+    ThfI18nModule.config(i18nConfig),
+    ThfTemplatesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

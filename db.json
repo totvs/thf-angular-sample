@@ -73,6 +73,14 @@
         "Idealista"
       ],
       "lookup": "Imperial shuttle"
+    },
+    {
+      "name": "Fabio Rocha",
+      "email": "fabio.rocha@totvs.com.br",
+      "phone": "1143211234",
+      "birthday": "1978-12-13T00:00:01-00:00",
+      "nationality": "deathstar",
+      "id": 6
     }
   ],
   "spaceships": [
@@ -257,6 +265,472 @@
     {
       "property": "program",
       "processId": 1
+    }
+  ],
+  "metadata": [
+    {
+      "id": "customers",
+      "version": 1,
+      "type": "list",
+      "title": "Customers",
+      "breadcrumb": {
+        "items": [
+          {
+            "label": "Customers"
+          }
+        ]
+      },
+      "actions": {
+        "detail": "customers-template/detail/:id",
+        "edit": "customers-template/edit/:id",
+        "new": "customers-template/new",
+        "remove": true
+      },
+      "fields": [
+        {
+          "property": "id",
+          "label": "Code",
+          "key": true
+        },
+        {
+          "property": "name"
+        },
+        {
+          "property": "email",
+          "label": "E-mail"
+        },
+        {
+          "property": "phone"
+        }
+      ]
+    },
+    {
+      "id": "customers",
+      "version": 1,
+      "type": "create",
+      "title": "Add New Customer",
+      "actions": {
+        "save": "customers-template/",
+        "cancel": "customers-template/"
+      },
+      "breadcrumb": {
+        "items": [
+          {
+            "label": "Customers",
+            "link": "customers-template/"
+          },
+          {
+            "label": "Add New Customer"
+          }
+        ]
+      },
+      "fields": [
+        {
+          "property": "name",
+          "required": true
+        },
+        {
+          "property": "email",
+          "label": "E-mail",
+          "required": true
+        },
+        {
+          "property": "phone",
+          "label": "Phone",
+          "required": true,
+          "mask": "(99) 99999?-9999"
+        },
+        {
+          "property": "birthday",
+          "label": "Birth date",
+          "type": "date"
+        },
+        {
+          "property": "nationality",
+          "options": [
+            {
+              "label": "Coruscant",
+              "value": "coruscant"
+            },
+            {
+              "label": "Death Star",
+              "value": "deathstar"
+            },
+            {
+              "label": "Kamino",
+              "value": "kamino"
+            },
+            {
+              "label": "Naboo",
+              "value": "naboo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "customers",
+      "version": 1,
+      "type": "edit",
+      "title": "Edit Customer",
+      "actions": {
+        "save": "customers-template/",
+        "cancel": "customers-template/"
+      },
+      "breadcrumb": {
+        "items": [
+          {
+            "label": "Customers",
+            "link": "customers-template/"
+          },
+          {
+            "label": "Edit Customer"
+          }
+        ]
+      },
+      "fields": [
+        {
+          "property": "name",
+          "required": true
+        },
+        {
+          "property": "email",
+          "label": "E-mail",
+          "required": true
+        },
+        {
+          "property": "phone",
+          "label": "Phone",
+          "required": true,
+          "mask": "(99) 99999?-9999"
+        },
+        {
+          "property": "birthday",
+          "label": "Birth date",
+          "type": "date"
+        },
+        {
+          "property": "nationality",
+          "options": [
+            {
+              "label": "Coruscant",
+              "value": "coruscant"
+            },
+            {
+              "label": "Death Star",
+              "value": "deathstar"
+            },
+            {
+              "label": "Kamino",
+              "value": "kamino"
+            },
+            {
+              "label": "Naboo",
+              "value": "naboo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "customers",
+      "version": 1,
+      "type": "detail",
+      "title": "Customer Detail",
+      "actions": {
+        "edit": "customers-template/edit/:id"
+      },
+      "breadcrumb": {
+        "items": [
+          {
+            "label": "Customers",
+            "link": "customers-template/"
+          },
+          {
+            "label": "Customer Detail"
+          }
+        ]
+      },
+      "fields": [
+        {
+          "property": "id",
+          "tag": true,
+          "label": "Code"
+        },
+        {
+          "property": "name",
+          "required": true
+        },
+        {
+          "property": "email",
+          "label": "E-mail",
+          "required": true
+        },
+        {
+          "property": "phone",
+          "label": "Phone",
+          "required": true,
+          "mask": "(99) 99999?-9999"
+        },
+        {
+          "property": "birthday",
+          "label": "Birth date",
+          "type": "date"
+        },
+        {
+          "property": "nationality",
+          "options": [
+            {
+              "label": "Coruscant",
+              "value": "coruscant"
+            },
+            {
+              "label": "Death Star",
+              "value": "deathstar"
+            },
+            {
+              "label": "Kamino",
+              "value": "kamino"
+            },
+            {
+              "label": "Naboo",
+              "value": "naboo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "orders",
+      "version": 1,
+      "type": "list",
+      "title": "Orders",
+      "breadcrumb": {
+        "items": [
+          {
+            "label": "Orders"
+          }
+        ]
+      },
+      "actions": {
+        "detail": "orders-template/detail/:id",
+        "edit": "orders-template/edit/:id",
+        "new": "orders-template/new",
+        "remove": true
+      },
+      "fields": [
+        {
+          "property": "id",
+          "label": "Code",
+          "key": true
+        },
+        {
+          "property": "name"
+        },
+        {
+          "property": "email",
+          "label": "E-mail"
+        },
+        {
+          "property": "phone"
+        }
+      ]
+    },
+    {
+      "id": "orders",
+      "version": 1,
+      "type": "create",
+      "title": "Add New Customer",
+      "actions": {
+        "save": "orders-template/",
+        "cancel": "orders-template/"
+      },
+      "breadcrumb": {
+        "items": [
+          {
+            "label": "Orders",
+            "link": "orders-template/"
+          },
+          {
+            "label": "Add New Customer"
+          }
+        ]
+      },
+      "fields": [
+        {
+          "property": "name",
+          "required": true
+        },
+        {
+          "property": "email",
+          "label": "E-mail",
+          "required": true
+        },
+        {
+          "property": "phone",
+          "label": "Phone",
+          "required": true,
+          "mask": "(99) 99999?-9999"
+        },
+        {
+          "property": "birthday",
+          "label": "Birth date",
+          "type": "date"
+        },
+        {
+          "property": "nationality",
+          "options": [
+            {
+              "label": "Coruscant",
+              "value": "coruscant"
+            },
+            {
+              "label": "Death Star",
+              "value": "deathstar"
+            },
+            {
+              "label": "Kamino",
+              "value": "kamino"
+            },
+            {
+              "label": "Naboo",
+              "value": "naboo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "orders",
+      "version": 1,
+      "type": "edit",
+      "title": "Edit Customer",
+      "actions": {
+        "save": "orders-template/",
+        "cancel": "orders-template/"
+      },
+      "breadcrumb": {
+        "items": [
+          {
+            "label": "Orders",
+            "link": "orders-template/"
+          },
+          {
+            "label": "Edit Customer"
+          }
+        ]
+      },
+      "fields": [
+        {
+          "property": "name",
+          "required": true
+        },
+        {
+          "property": "email",
+          "label": "E-mail",
+          "required": true
+        },
+        {
+          "property": "phone",
+          "label": "Phone",
+          "required": true,
+          "mask": "(99) 99999?-9999"
+        },
+        {
+          "property": "birthday",
+          "label": "Birth date",
+          "type": "date"
+        },
+        {
+          "property": "nationality",
+          "options": [
+            {
+              "label": "Coruscant",
+              "value": "coruscant"
+            },
+            {
+              "label": "Death Star",
+              "value": "deathstar"
+            },
+            {
+              "label": "Kamino",
+              "value": "kamino"
+            },
+            {
+              "label": "Naboo",
+              "value": "naboo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "orders",
+      "version": 1,
+      "type": "detail",
+      "title": "Customer Detail",
+      "actions": {
+        "edit": "orders-template/edit/:id"
+      },
+      "breadcrumb": {
+        "items": [
+          {
+            "label": "Orders",
+            "link": "orders-template/"
+          },
+          {
+            "label": "Customer Detail"
+          }
+        ]
+      },
+      "fields": [
+        {
+          "property": "id",
+          "tag": true,
+          "label": "Code"
+        },
+        {
+          "property": "name",
+          "required": true
+        },
+        {
+          "property": "email",
+          "label": "E-mail",
+          "required": true
+        },
+        {
+          "property": "phone",
+          "label": "Phone",
+          "required": true,
+          "mask": "(99) 99999?-9999"
+        },
+        {
+          "property": "birthday",
+          "label": "Birth date",
+          "type": "date"
+        },
+        {
+          "property": "nationality",
+          "options": [
+            {
+              "label": "Coruscant",
+              "value": "coruscant"
+            },
+            {
+              "label": "Death Star",
+              "value": "deathstar"
+            },
+            {
+              "label": "Kamino",
+              "value": "kamino"
+            },
+            {
+              "label": "Naboo",
+              "value": "naboo"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
