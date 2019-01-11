@@ -3,7 +3,7 @@ Aplicação desenvolvida em [THF (Totvs HTML Framework)](https://thf.totvs.com.b
 
 > Os templates podem sofrer atualizações conforme forem alterados pelo time de UX! 
 
-### Agendamento job e relatório
+### Agendamento processos e relatórios
 ![Use Extension](https://github.com/totvs/thf-angular-sample/raw/master/assets/images/job-scheduler.gif)
 
 ### CRUD
