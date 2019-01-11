@@ -3,6 +3,15 @@ Aplicação desenvolvida em [THF (Totvs HTML Framework)](https://thf.totvs.com.b
 
 > Os templates podem sofrer atualizações conforme forem alterados pelo time de UX! 
 
+### Agendamento job e relatório
+![Use Extension](https://github.com/totvs/thf-angular-sample/raw/master/assets/images/job-scheduler.gif)
+
+### CRUD
+![Use Extension](https://github.com/totvs/thf-angular-sample/raw/master/assets/images/crud.gif)
+
+### Mestre Detalhe
+![Use Extension](https://github.com/totvs/thf-angular-sample/raw/master/assets/images/master-detail.gif)
+
 ## Getting Started
 Essas instruções farão com que você tenha uma cópia do projeto em execução na sua máquina para fins de desenvolvimento e teste.
 
