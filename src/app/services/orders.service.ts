@@ -22,12 +22,6 @@ export class OrdersService {
 
     return this.http.get(`${this.apiUrl}orders`, { params }).pipe(
         map((response: TotvsResponse<Order>) => {
-          response.items = response.items.map(item => {
-            item.customerName = item.customer.name;
-            delete item.customer;
-            return item;
-          });
-
           if (search) {
             search = search.toLocaleLowerCase();
             response.items = response.items

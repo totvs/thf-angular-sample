@@ -36,9 +36,11 @@
     "@progress/kendo-drawing": "1.5.7",
     "@progress/kendo-theme-default": "2.56.0",
     "@totvs/thf-kendo": "3.1.0",
+    "@totvs/thf-templates": "3.1.0",
     "@totvs/thf-theme-kendo": "3.1.0",
     "@totvs/thf-ui": "3.1.0",
     "core-js": "2.4.1",
+    "nodemon": "^1.18.9",
     "rxjs": "6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "^0.8.26"

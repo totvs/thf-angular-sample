@@ -241,5 +241,524 @@
       "consumables": "Live food tanks",
       "vehicle_class": "sail barge"
     }
+  ],
+  "processes": [
+    {
+      "id": 1,
+      "processID": "1",
+      "description": "Exemplo de agendamento"
+    }
+  ],
+  "parameters": [
+    {
+      "property": "server",
+      "processId": 1
+    },
+    {
+      "property": "program",
+      "processId": 1
+    }
+  ],
+  "metadata": [
+    {
+      "id": "customers",
+      "version": 1,
+      "type": "list",
+      "title": "Customers",
+      "breadcrumb": {
+        "items": [
+          {
+            "label": "Customers"
+          }
+        ]
+      },
+      "actions": {
+        "detail": "customers-template/detail/:id",
+        "edit": "customers-template/edit/:id",
+        "new": "customers-template/new",
+        "remove": true
+      },
+      "fields": [
+        {
+          "property": "id",
+          "label": "Code",
+          "key": true
+        },
+        {
+          "property": "name"
+        },
+        {
+          "property": "email",
+          "label": "E-mail"
+        },
+        {
+          "property": "phone"
+        }
+      ]
+    },
+    {
+      "id": "customers",
+      "version": 1,
+      "type": "create",
+      "title": "Add New Customer",
+      "actions": {
+        "save": "customers-template/",
+        "cancel": "customers-template/"
+      },
+      "breadcrumb": {
+        "items": [
+          {
+            "label": "Customers",
+            "link": "customers-template/"
+          },
+          {
+            "label": "New Customer"
+          }
+        ]
+      },
+      "fields": [
+        {
+          "property": "name",
+          "required": true
+        },
+        {
+          "property": "email",
+          "label": "E-mail",
+          "required": true
+        },
+        {
+          "property": "phone",
+          "label": "Phone",
+          "required": true,
+          "mask": "(99) 99999?-9999"
+        },
+        {
+          "property": "birthday",
+          "label": "Birth date",
+          "type": "date"
+        },
+        {
+          "property": "nationality",
+          "options": [
+            {
+              "label": "Coruscant",
+              "value": "coruscant"
+            },
+            {
+              "label": "Death Star",
+              "value": "deathstar"
+            },
+            {
+              "label": "Kamino",
+              "value": "kamino"
+            },
+            {
+              "label": "Naboo",
+              "value": "naboo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "customers",
+      "version": 1,
+      "type": "edit",
+      "title": "Edit Customer",
+      "actions": {
+        "save": "customers-template/",
+        "cancel": "customers-template/"
+      },
+      "breadcrumb": {
+        "items": [
+          {
+            "label": "Customers",
+            "link": "customers-template/"
+          },
+          {
+            "label": "Edit Customer"
+          }
+        ]
+      },
+      "fields": [
+        {
+          "property": "name",
+          "required": true
+        },
+        {
+          "property": "email",
+          "label": "E-mail",
+          "required": true
+        },
+        {
+          "property": "phone",
+          "label": "Phone",
+          "required": true,
+          "mask": "(99) 99999?-9999"
+        },
+        {
+          "property": "birthday",
+          "label": "Birth date",
+          "type": "date"
+        },
+        {
+          "property": "nationality",
+          "options": [
+            {
+              "label": "Coruscant",
+              "value": "coruscant"
+            },
+            {
+              "label": "Death Star",
+              "value": "deathstar"
+            },
+            {
+              "label": "Kamino",
+              "value": "kamino"
+            },
+            {
+              "label": "Naboo",
+              "value": "naboo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "customers",
+      "version": 1,
+      "type": "detail",
+      "title": "Customer Detail",
+      "actions": {
+        "edit": "customers-template/edit/:id"
+      },
+      "breadcrumb": {
+        "items": [
+          {
+            "label": "Customers",
+            "link": "customers-template/"
+          },
+          {
+            "label": "Customer Detail"
+          }
+        ]
+      },
+      "fields": [
+        {
+          "property": "id",
+          "tag": true,
+          "label": "Code"
+        },
+        {
+          "property": "name",
+          "required": true
+        },
+        {
+          "property": "email",
+          "label": "E-mail",
+          "required": true
+        },
+        {
+          "property": "phone",
+          "label": "Phone",
+          "required": true,
+          "mask": "(99) 99999?-9999"
+        },
+        {
+          "property": "birthday",
+          "label": "Birth date",
+          "type": "date"
+        },
+        {
+          "property": "nationality",
+          "options": [
+            {
+              "label": "Coruscant",
+              "value": "coruscant"
+            },
+            {
+              "label": "Death Star",
+              "value": "deathstar"
+            },
+            {
+              "label": "Kamino",
+              "value": "kamino"
+            },
+            {
+              "label": "Naboo",
+              "value": "naboo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "orders",
+      "version": 1,
+      "type": "list",
+      "title": "Orders",
+      "breadcrumb": {
+        "items": [
+          {
+            "label": "Orders"
+          }
+        ]
+      },
+      "actions": {
+        "detail": "orders-template/detail/:id",
+        "edit": "orders-template/edit/:id",
+        "new": "orders-template/new",
+        "remove": true
+      },
+      "fields": [
+        {
+          "property": "status"
+        },
+        {
+          "property": "id",
+          "label": "Code",
+          "key": true
+        },
+        {
+          "property": "customerName",
+          "label": "Customer"
+        },
+        {
+          "property": "total"
+        }
+      ]
+    },
+    {
+      "id": "orders",
+      "version": 1,
+      "type": "create",
+      "title": "Add New Order",
+      "actions": {
+        "save": "orders-template/",
+        "cancel": "orders-template/"
+      },
+      "breadcrumb": {
+        "items": [
+          {
+            "label": "Orders",
+            "link": "orders-template/"
+          },
+          {
+            "label": "New Order"
+          }
+        ]
+      },
+      "fields": [
+        {
+          "property": "customer",
+          "required": true
+        },
+        {
+          "property": "status",
+          "required": true,
+          "options": [
+            {
+              "label": "Pending",
+              "value": "1"
+            },
+            {
+              "label": "Cancelled",
+              "value": "2"
+            },
+            {
+              "label": "Completed",
+              "value": "3"
+            }
+          ]
+        },
+        {
+          "property": "date",
+          "type": "date"
+        },
+        {
+          "property": "items",
+          "type": "detail",
+          "divider": "Items",
+          "detail": {
+            "columns": [
+              {
+                "property": "productName",
+                "label": "Product",
+                "align": "left"
+              },
+              {
+                "property": "quantity",
+                "label": "Quantity",
+                "required": true,
+                "width": 200,
+                "align": "right"
+              },
+              {
+                "property": "unitPrice",
+                "label": "Price",
+                "required": true,
+                "align": "rigth",
+                "width": 250
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "orders",
+      "version": 1,
+      "type": "edit",
+      "title": "Edit Order",
+      "actions": {
+        "save": "orders-template/",
+        "cancel": "orders-template/"
+      },
+      "breadcrumb": {
+        "items": [
+          {
+            "label": "Orders",
+            "link": "orders-template/"
+          },
+          {
+            "label": "Edit Order"
+          }
+        ]
+      },
+      "fields": [
+        {
+          "property": "customer",
+          "required": true
+        },
+        {
+          "property": "status",
+          "required": true,
+          "options": [
+            {
+              "label": "Pending",
+              "value": "1"
+            },
+            {
+              "label": "Cancelled",
+              "value": "2"
+            },
+            {
+              "label": "Completed",
+              "value": "3"
+            }
+          ]
+        },
+        {
+          "property": "date",
+          "type": "date"
+        },
+        {
+          "property": "items",
+          "type": "detail",
+          "divider": "Items",
+          "detail": {
+            "columns": [
+              {
+                "property": "productName",
+                "label": "Product",
+                "align": "left"
+              },
+              {
+                "property": "quantity",
+                "label": "Quantity",
+                "required": true,
+                "width": 200,
+                "align": "right"
+              },
+              {
+                "property": "unitPrice",
+                "label": "Price",
+                "required": true,
+                "align": "rigth",
+                "width": 250,
+                "type": "number"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "orders",
+      "version": 1,
+      "type": "detail",
+      "title": "Order Detail",
+      "actions": {
+        "edit": "orders-template/edit/:id"
+      },
+      "breadcrumb": {
+        "items": [
+          {
+            "label": "Orders",
+            "link": "orders-template/"
+          },
+          {
+            "label": "Order Detail"
+          }
+        ]
+      },
+      "fields": [
+        {
+          "property": "customer",
+          "required": true
+        },
+        {
+          "property": "status",
+          "required": true,
+          "options": [
+            {
+              "label": "Pending",
+              "value": "1"
+            },
+            {
+              "label": "Cancelled",
+              "value": "2"
+            },
+            {
+              "label": "Completed",
+              "value": "3"
+            }
+          ]
+        },
+        {
+          "property": "date",
+          "type": "date"
+        },
+        {
+          "property": "items",
+          "type": "detail",
+          "divider": "Items",
+          "detail": {
+            "columns": [
+              {
+                "property": "productName",
+                "label": "Product",
+                "align": "left"
+              },
+              {
+                "property": "quantity",
+                "label": "Quantity",
+                "required": true,
+                "width": 200,
+                "align": "right"
+              },
+              {
+                "property": "unitPrice",
+                "label": "Price",
+                "required": true,
+                "align": "rigth",
+                "width": 250,
+                "type": "number"
+              }
+            ]
+          }
+        }
+      ]
+    }
   ]
 }
