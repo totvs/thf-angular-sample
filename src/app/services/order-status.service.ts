@@ -19,7 +19,7 @@ export class OrderStatusService {
         this.statusOptions = [
           { label: this.literals['pending'], value: '1' },
           { label: this.literals['cancelled'], value: '2' },
-          { label: this.literals['completed'], value: '3' },
+          { label: this.literals['completed'], value: '3' }
         ];
       });
      }

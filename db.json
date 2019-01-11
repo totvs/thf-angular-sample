@@ -73,14 +73,6 @@
         "Idealista"
       ],
       "lookup": "Imperial shuttle"
-    },
-    {
-      "name": "Fabio Rocha",
-      "email": "fabio.rocha@totvs.com.br",
-      "phone": "1143211234",
-      "birthday": "1978-12-13T00:00:01-00:00",
-      "nationality": "deathstar",
-      "id": 6
     }
   ],
   "spaceships": [
@@ -320,7 +312,7 @@
             "link": "customers-template/"
           },
           {
-            "label": "Add New Customer"
+            "label": "New Customer"
           }
         ]
       },
@@ -520,19 +512,19 @@
       },
       "fields": [
         {
+          "property": "status"
+        },
+        {
           "property": "id",
           "label": "Code",
           "key": true
         },
         {
-          "property": "name"
+          "property": "customerName",
+          "label": "Customer"
         },
         {
-          "property": "email",
-          "label": "E-mail"
-        },
-        {
-          "property": "phone"
+          "property": "total"
         }
       ]
     },
@@ -540,7 +532,7 @@
       "id": "orders",
       "version": 1,
       "type": "create",
-      "title": "Add New Customer",
+      "title": "Add New Order",
       "actions": {
         "save": "orders-template/",
         "cancel": "orders-template/"
@@ -552,51 +544,64 @@
             "link": "orders-template/"
           },
           {
-            "label": "Add New Customer"
+            "label": "New Order"
           }
         ]
       },
       "fields": [
         {
-          "property": "name",
+          "property": "customer",
           "required": true
         },
         {
-          "property": "email",
-          "label": "E-mail",
-          "required": true
-        },
-        {
-          "property": "phone",
-          "label": "Phone",
+          "property": "status",
           "required": true,
-          "mask": "(99) 99999?-9999"
+          "options": [
+            {
+              "label": "Pending",
+              "value": "1"
+            },
+            {
+              "label": "Cancelled",
+              "value": "2"
+            },
+            {
+              "label": "Completed",
+              "value": "3"
+            }
+          ]
         },
         {
-          "property": "birthday",
-          "label": "Birth date",
+          "property": "date",
           "type": "date"
         },
         {
-          "property": "nationality",
-          "options": [
-            {
-              "label": "Coruscant",
-              "value": "coruscant"
-            },
-            {
-              "label": "Death Star",
-              "value": "deathstar"
-            },
-            {
-              "label": "Kamino",
-              "value": "kamino"
-            },
-            {
-              "label": "Naboo",
-              "value": "naboo"
-            }
-          ]
+          "property": "items",
+          "type": "detail",
+          "divider": "Items",
+          "detail": {
+            "columns": [
+              {
+                "property": "productName",
+                "label": "Product",
+                "align": "left"
+              },
+              {
+                "property": "quantity",
+                "label": "Quantity",
+                "required": true,
+                "width": 200,
+                "align": "right"
+              },
+              {
+                "property": "unitPrice",
+                "label": "Price",
+                "required": true,
+                "align": "rigth",
+                "width": 250
+              }
+            ]
+          }
         }
       ]
     },
@@ -604,7 +609,7 @@
       "id": "orders",
       "version": 1,
       "type": "edit",
-      "title": "Edit Customer",
+      "title": "Edit Order",
       "actions": {
         "save": "orders-template/",
         "cancel": "orders-template/"
@@ -616,51 +621,65 @@
             "link": "orders-template/"
           },
           {
-            "label": "Edit Customer"
+            "label": "Edit Order"
           }
         ]
       },
       "fields": [
         {
-          "property": "name",
+          "property": "customer",
           "required": true
         },
         {
-          "property": "email",
-          "label": "E-mail",
-          "required": true
-        },
-        {
-          "property": "phone",
-          "label": "Phone",
+          "property": "status",
           "required": true,
-          "mask": "(99) 99999?-9999"
+          "options": [
+            {
+              "label": "Pending",
+              "value": "1"
+            },
+            {
+              "label": "Cancelled",
+              "value": "2"
+            },
+            {
+              "label": "Completed",
+              "value": "3"
+            }
+          ]
         },
         {
-          "property": "birthday",
-          "label": "Birth date",
+          "property": "date",
           "type": "date"
         },
         {
-          "property": "nationality",
-          "options": [
-            {
-              "label": "Coruscant",
-              "value": "coruscant"
-            },
-            {
-              "label": "Death Star",
-              "value": "deathstar"
-            },
-            {
-              "label": "Kamino",
-              "value": "kamino"
-            },
-            {
-              "label": "Naboo",
-              "value": "naboo"
-            }
-          ]
+          "property": "items",
+          "type": "detail",
+          "divider": "Items",
+          "detail": {
+            "columns": [
+              {
+                "property": "productName",
+                "label": "Product",
+                "align": "left"
+              },
+              {
+                "property": "quantity",
+                "label": "Quantity",
+                "required": true,
+                "width": 200,
+                "align": "right"
+              },
+              {
+                "property": "unitPrice",
+                "label": "Price",
+                "required": true,
+                "align": "rigth",
+                "width": 250,
+                "type": "number"
+              }
+            ]
+          }
         }
       ]
     },
@@ -668,7 +687,7 @@
       "id": "orders",
       "version": 1,
       "type": "detail",
-      "title": "Customer Detail",
+      "title": "Order Detail",
       "actions": {
         "edit": "orders-template/edit/:id"
       },
@@ -679,56 +698,65 @@
             "link": "orders-template/"
           },
           {
-            "label": "Customer Detail"
+            "label": "Order Detail"
           }
         ]
       },
       "fields": [
         {
-          "property": "id",
-          "tag": true,
-          "label": "Code"
-        },
-        {
-          "property": "name",
+          "property": "customer",
           "required": true
         },
         {
-          "property": "email",
-          "label": "E-mail",
-          "required": true
-        },
-        {
-          "property": "phone",
-          "label": "Phone",
+          "property": "status",
           "required": true,
-          "mask": "(99) 99999?-9999"
+          "options": [
+            {
+              "label": "Pending",
+              "value": "1"
+            },
+            {
+              "label": "Cancelled",
+              "value": "2"
+            },
+            {
+              "label": "Completed",
+              "value": "3"
+            }
+          ]
         },
         {
-          "property": "birthday",
-          "label": "Birth date",
+          "property": "date",
           "type": "date"
         },
         {
-          "property": "nationality",
-          "options": [
-            {
-              "label": "Coruscant",
-              "value": "coruscant"
-            },
-            {
-              "label": "Death Star",
-              "value": "deathstar"
-            },
-            {
-              "label": "Kamino",
-              "value": "kamino"
-            },
-            {
-              "label": "Naboo",
-              "value": "naboo"
-            }
-          ]
+          "property": "items",
+          "type": "detail",
+          "divider": "Items",
+          "detail": {
+            "columns": [
+              {
+                "property": "productName",
+                "label": "Product",
+                "align": "left"
+              },
+              {
+                "property": "quantity",
+                "label": "Quantity",
+                "required": true,
+                "width": 200,
+                "align": "right"
+              },
+              {
+                "property": "unitPrice",
+                "label": "Price",
+                "required": true,
+                "align": "rigth",
+                "width": 250,
+                "type": "number"
+              }
+            ]
+          }
         }
       ]
     }
